@@ -9,33 +9,35 @@ export default function RecipeList() {
 
   return (
     <RecipeStyledUl>
-      {data.map((data) => (
-        <li key={data.name}>
-          <RecipeContainer>
+      {data.map((recipe) => (
+        <li key={recipe.name}>
+          <StyledFigure>
             <Image
-              src={data.imageURL}
-              alt={data.name}
+              src={recipe.imageURL}
+              alt={recipe.name}
               width={150}
               height={150}
             />
-            <RecipeTitle>{data.name}</RecipeTitle>
-          </RecipeContainer>
+            <StyledFigcaption>{recipe.name}</StyledFigcaption>
+          </StyledFigure>
         </li>
       ))}
     </RecipeStyledUl>
   );
 }
 
-const RecipeContainer = styled.div`
+const StyledFigure = styled.figure`
   position: relative;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  z-index: -1;
+  margin: 0;
 `;
 
-const RecipeTitle = styled.p`
-  position: absolute;
+const StyledFigcaption = styled.figcaption`
   font-size: 10px;
+  position: absolute;
   left: 5%;
-  top: 70%;
+  bottom: 10%;
   color: black;
   z-index: 1;
 `;
