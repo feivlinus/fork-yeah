@@ -33,17 +33,17 @@ const StyledFigure = styled.figure`
   height: 150px;
   width: 150px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  z-index: -1;
+  z-index: -10;
   margin: 0;
 `;
 
 const StyledFigcaption = styled.figcaption`
-  font-size: 10px;
+  font-size: 0.8rem;
   position: absolute;
   left: 5%;
   bottom: 10%;
-  color: black;
-  z-index: 1;
+  color: #000;
+  z-index: 10;
 `;
 
 const RecipeStyledUl = styled.ul`
