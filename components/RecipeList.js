@@ -8,23 +8,21 @@ export default function RecipeList() {
   }
 
   return (
-    <>
-      <RecipeStyledUl>
-        {data.map((data) => (
-          <li key={data.name}>
-            <RecipeContainer>
-              <Image
-                src={data.imageURL}
-                alt={data.name}
-                width={150}
-                height={150}
-              />
-              <RecipeTitle>{data.name}</RecipeTitle>
-            </RecipeContainer>
-          </li>
-        ))}
-      </RecipeStyledUl>
-    </>
+    <RecipeStyledUl>
+      {data.map((data) => (
+        <li key={data.name}>
+          <RecipeContainer>
+            <Image
+              src={data.imageURL}
+              alt={data.name}
+              width={150}
+              height={150}
+            />
+            <RecipeTitle>{data.name}</RecipeTitle>
+          </RecipeContainer>
+        </li>
+      ))}
+    </RecipeStyledUl>
   );
 }
 
