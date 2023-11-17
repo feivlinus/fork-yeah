@@ -3,6 +3,7 @@ const data = [
     name: "Grilled Salmon with Lemon-Dill Sauce",
     description: "Juicy grilled salmon topped with a zesty lemon-dill sauce.",
     imageURL: "https://dummyimage.com/150x150/fff/000",
+    preparationTime: "40 min",
     ingredients: [
       { quantity: "4", ingredient: "salmon fillets" },
       { quantity: "1/4 cup", ingredient: "fresh lemon juice" },
@@ -17,6 +18,7 @@ const data = [
     description:
       "A healthy and colorful salad with quinoa, fresh vegetables, and a tangy vinaigrette.",
     imageURL: "https://dummyimage.com/150x150/fff/000",
+    preparationTime: "40 min",
     ingredients: [
       { quantity: "1 cup", ingredient: "quinoa, cooked" },
       { quantity: "1 cup", ingredient: "cherry tomatoes, halved" },
@@ -33,6 +35,7 @@ const data = [
     name: "Beef Tacos with Avocado Salsa",
     description: "Savory beef tacos topped with a refreshing avocado salsa.",
     imageURL: "https://dummyimage.com/150x150/fff/000",
+    preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", ingredient: "ground beef" },
       { quantity: "1 packet", ingredient: "taco seasoning" },
@@ -51,6 +54,7 @@ const data = [
     description:
       "Delicious pasta tossed in a vibrant pesto sauce and topped with sweet cherry tomatoes.",
     imageURL: "https://dummyimage.com/150x150/fff/000",
+    preparationTime: "40 min",
     ingredients: [
       { quantity: "12 oz", ingredient: "penne pasta, cooked" },
       { quantity: "1 cup", ingredient: "fresh basil leaves" },
@@ -67,6 +71,7 @@ const data = [
     description:
       "Grilled chicken and colorful vegetables skewers marinated in a savory herb sauce.",
     imageURL: "https://dummyimage.com/150x150/fff/000",
+    preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", ingredient: "chicken breast, cut into cubes" },
       { quantity: "1", ingredient: "red bell pepper, cut into chunks" },
@@ -87,6 +92,7 @@ const data = [
     description:
       "Quick and flavorful stir-fried shrimp with tender asparagus spears.",
     imageURL: "https://dummyimage.com/150x150/fff/000",
+    preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", ingredient: "shrimp, peeled and deveined" },
       {
@@ -107,6 +113,7 @@ const data = [
     description:
       "A classic Italian salad with fresh tomatoes, mozzarella, and basil.",
     imageURL: "https://dummyimage.com/150x150/fff/000",
+    preparationTime: "40 min",
     ingredients: [
       { quantity: "4", ingredient: "ripe tomatoes, sliced" },
       { quantity: "8 oz", ingredient: "fresh mozzarella, sliced" },
@@ -121,6 +128,7 @@ const data = [
     description:
       "Hearty and flavorful chili loaded with beans, vegetables, and spices.",
     imageURL: "https://dummyimage.com/150x150/fff/000",
+    preparationTime: "40 min",
     ingredients: [
       {
         quantity: "2 cans",
@@ -146,6 +154,7 @@ const data = [
     description:
       "Creamy and comforting risotto with sautéed mushrooms and Parmesan cheese.",
     imageURL: "https://dummyimage.com/150x150/fff/000",
+    preparationTime: "40 min",
     ingredients: [
       { quantity: "1 cup", ingredient: "Arborio rice" },
       { quantity: "1/2 lb", ingredient: "mushrooms, sliced" },
@@ -164,6 +173,7 @@ const data = [
     description:
       "Classic homemade chocolate chip cookies that are chewy on the inside and crispy on the outside.",
     imageURL: "https://dummyimage.com/150x150/fff/000",
+    preparationTime: "40 min",
     ingredients: [
       { quantity: "2 1/4 cups", ingredient: "all-purpose flour" },
       { quantity: "1 tsp", ingredient: "baking soda" },
