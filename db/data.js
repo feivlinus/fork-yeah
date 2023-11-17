@@ -1,9 +1,11 @@
 const data = [
   {
-    name: "Grilled Salmon with Lemon-Dill Sauce",
-    description: "Juicy grilled salmon topped with a zesty lemon-dill sauce.",
-    imageURL: "https://dummyimage.com/150x150/fff/000",
-    preparationTime: "40 min",
+    id: 1,
+    name: "Pizza Soup",
+    description:
+      "Nice not so healthy dish but I swear it tastes wonderful. Buy a cheap as possible pizza. Throw everything inside a large pot. Cut the pizza, tomatoes and salami into very tiny chunks. Cook everything together for at least 12 hours.",
+    imageURL: "/recipe-images/pizzasoup.jpeg",
+    preparationTime: "12 hours",
     ingredients: [
       { quantity: "4", ingredient: "salmon fillets" },
       { quantity: "1/4 cup", ingredient: "fresh lemon juice" },
@@ -14,10 +16,11 @@ const data = [
     ],
   },
   {
-    name: "Vegetarian Quinoa Salad",
+    id: 2,
+    name: "Grilled Smiley",
     description:
       "A healthy and colorful salad with quinoa, fresh vegetables, and a tangy vinaigrette.",
-    imageURL: "https://dummyimage.com/150x150/fff/000",
+    imageURL: "/recipe-images/grilled-smiley.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 cup", ingredient: "quinoa, cooked" },
@@ -32,9 +35,10 @@ const data = [
     ],
   },
   {
-    name: "Beef Tacos with Avocado Salsa",
+    id: 3,
+    name: "Haunted Lasagna",
     description: "Savory beef tacos topped with a refreshing avocado salsa.",
-    imageURL: "https://dummyimage.com/150x150/fff/000",
+    imageURL: "/recipe-images/haunted-lansagna.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", ingredient: "ground beef" },
@@ -50,10 +54,11 @@ const data = [
     ],
   },
   {
-    name: "Pesto Pasta with Cherry Tomatoes",
+    id: 4,
+    name: "Inside-Out Lasagna",
     description:
       "Delicious pasta tossed in a vibrant pesto sauce and topped with sweet cherry tomatoes.",
-    imageURL: "https://dummyimage.com/150x150/fff/000",
+    imageURL: "/recipe-images/inside-out-lasagna.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "12 oz", ingredient: "penne pasta, cooked" },
@@ -67,10 +72,11 @@ const data = [
     ],
   },
   {
-    name: "Chicken and Vegetable Skewers",
+    id: 10,
+    name: "Low Carb Ananas Soup",
     description:
       "Grilled chicken and colorful vegetables skewers marinated in a savory herb sauce.",
-    imageURL: "https://dummyimage.com/150x150/fff/000",
+    imageURL: "/recipe-images/low-carb-ananas-soup.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", ingredient: "chicken breast, cut into cubes" },
@@ -88,10 +94,11 @@ const data = [
     ],
   },
   {
-    name: "Shrimp and Asparagus Stir Fry",
+    id: 5,
+    name: "Unicorn Ice",
     description:
       "Quick and flavorful stir-fried shrimp with tender asparagus spears.",
-    imageURL: "https://dummyimage.com/150x150/fff/000",
+    imageURL: "/recipe-images/unicorn-ice.jpeg",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", ingredient: "shrimp, peeled and deveined" },
@@ -109,10 +116,11 @@ const data = [
     ],
   },
   {
+    id: 6,
     name: "Caprese Salad",
     description:
       "A classic Italian salad with fresh tomatoes, mozzarella, and basil.",
-    imageURL: "https://dummyimage.com/150x150/fff/000",
+    imageURL: "/recipe-images/pizzasoup.jpeg",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "4", ingredient: "ripe tomatoes, sliced" },
@@ -124,10 +132,11 @@ const data = [
     ],
   },
   {
+    id: 7,
     name: "Vegetarian Chili",
     description:
       "Hearty and flavorful chili loaded with beans, vegetables, and spices.",
-    imageURL: "https://dummyimage.com/150x150/fff/000",
+    imageURL: "/recipe-images/pizzasoup.jpeg",
     preparationTime: "40 min",
     ingredients: [
       {
@@ -150,10 +159,11 @@ const data = [
     ],
   },
   {
+    id: 8,
     name: "Mushroom Risotto",
     description:
       "Creamy and comforting risotto with sautéed mushrooms and Parmesan cheese.",
-    imageURL: "https://dummyimage.com/150x150/fff/000",
+    imageURL: "/recipe-images/generic-food-1.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 cup", ingredient: "Arborio rice" },
@@ -169,10 +179,11 @@ const data = [
     ],
   },
   {
+    id: 9,
     name: "Chocolate Chip Cookies",
     description:
       "Classic homemade chocolate chip cookies that are chewy on the inside and crispy on the outside.",
-    imageURL: "https://dummyimage.com/150x150/fff/000",
+    imageURL: "/recipe-images/generic-food.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "2 1/4 cups", ingredient: "all-purpose flour" },

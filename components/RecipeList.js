@@ -6,9 +6,9 @@ import Link from "next/link";
 export default function RecipeList() {
   return (
     <RecipeStyledUl>
-      {data.map((recipe, index) => (
+      {data.map((recipe) => (
         <li key={recipe.name}>
-          <Link href={`/recipe/${index}`}>
+          <Link href={`/recipe/${recipe.id}`}>
             <StyledFigure>
               <Image
                 src={recipe.imageURL}
@@ -39,7 +39,8 @@ const StyledFigcaption = styled.figcaption`
   position: absolute;
   left: 5%;
   bottom: 10%;
-  color: #000;
+  color: #fff;
+  text-shadow: 1px 1px 5px #000;
   z-index: 10;
 `;
 
