@@ -1,27 +1,24 @@
 import data from "@/db/data";
 import Image from "next/image";
 import styled from "styled-components";
+import Link from "next/link";
 
 export default function RecipeList() {
-  if (!data) {
-    return <p>Data not found</p>;
-  }
-
   return (
     <RecipeStyledUl>
       {data.map((recipe) => (
         <li key={recipe.name}>
-          <StyledFigure>
-            <Image
-              src={recipe.imageURL}
-              alt={recipe.name}
-              // width={150}
-              // height={150}
-              fill
-              style={{ objectFit: "cover" }}
-            />
-            <StyledFigcaption>{recipe.name}</StyledFigcaption>
-          </StyledFigure>
+          <Link href={`/recipe/${recipe.id}`}>
+            <StyledFigure>
+              <Image
+                src={recipe.imageURL}
+                alt={recipe.name}
+                fill
+                style={{ objectFit: "cover" }}
+              />
+              <StyledFigcaption>{recipe.name}</StyledFigcaption>
+            </StyledFigure>
+          </Link>
         </li>
       ))}
     </RecipeStyledUl>
@@ -42,7 +39,8 @@ const StyledFigcaption = styled.figcaption`
   position: absolute;
   left: 5%;
   bottom: 10%;
-  color: #000;
+  color: #fff;
+  text-shadow: 1px 1px 5px #000;
   z-index: 10;
 `;
 
