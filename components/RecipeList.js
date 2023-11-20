@@ -1,11 +1,10 @@
-import data from "@/db/data";
 import Image from "next/image";
 import styled from "styled-components";
 import Link from "next/link";
 
-export default function RecipeList() {
+export default function RecipeList({ storedRecipes }) {
   //Add empty entry for the Create Recipe Link/Symbol
-  const recipeData = [...data, {}];
+  const recipeData = [...storedRecipes, {}];
 
   return (
     <RecipeStyledUl>
@@ -22,7 +21,11 @@ export default function RecipeList() {
             <Link href={`/recipe/${recipe.id}`}>
               <StyledFigure>
                 <Image
-                  src={recipe.imageURL}
+                  src={
+                    recipe.imageURL
+                      ? recipe.imageURL
+                      : "/recipe-images/generic-food-3.png"
+                  }
                   alt={recipe.name}
                   fill
                   style={{ objectFit: "cover" }}
