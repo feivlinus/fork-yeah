@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { v4 as uuidv4, v4 } from "uuid";
 
 export default function CreatePage({ handleAddRecipe }) {
   const router = useRouter();
@@ -18,16 +19,17 @@ export default function CreatePage({ handleAddRecipe }) {
 
   function prepareFormData(formData) {
     const preparedNewRecipeData = {
+      id: uuidv4(),
       name: formData.title,
       preparationTime: formData.duration,
       imageURL: formData.imgurl,
       description: formData.description,
-      ingredients: {
-        ingredient1: [formData.ingredient1, formData.amount1],
-        ingredient2: [formData.ingredient2, formData.amount2],
-        ingredient3: [formData.ingredient3, formData.amount3],
-        ingredient4: [formData.ingredient4, formData.amount4],
-      },
+      ingredients: [
+        { quantity: formData.amount1, ingredient: formData.ingredient1 },
+        { quantity: formData.amount2, ingredient: formData.ingredient2 },
+        { quantity: formData.amount3, ingredient: formData.ingredient3 },
+        { quantity: formData.amount4, ingredient: formData.ingredient4 },
+      ],
     };
     return preparedNewRecipeData;
   }
@@ -61,7 +63,7 @@ export default function CreatePage({ handleAddRecipe }) {
         <textarea name="description" rows="5" />
 
         <button type="submit">Add recipe</button>
-        <button>Cancel</button>
+        <button onClick={() => router.push("/")}>Cancel</button>
       </StyledForm>
     </>
   );

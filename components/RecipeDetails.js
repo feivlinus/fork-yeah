@@ -7,18 +7,26 @@ export default function RecipeDetails({ recipeData }) {
     <RecipeCard>
       <h1> {recipeData.name}</h1>
       <StyledImage
-        src={recipeData.imageURL}
+        src={
+          recipeData.imageURL
+            ? recipeData.imageURL
+            : "/recipe-images/generic-food-3.png"
+        }
         alt={recipeData.name}
         width={300}
         height={300}
       />
       <p>⏰ {recipeData.preparationTime}</p>
       <ul>
-        {recipeData.ingredients.map((ingredient) => (
-          <li key={ingredient.ingredient}>
-            {ingredient.ingredient} - {ingredient.quantity}
-          </li>
-        ))}
+        {recipeData.ingredients.map((ingredient) =>
+          ingredient.ingredient ? (
+            <li key={ingredient.ingredient}>
+              {ingredient.quantity} - {ingredient.ingredient}
+            </li>
+          ) : (
+            ""
+          )
+        )}
       </ul>
       <StyledDescription>{recipeData.description}</StyledDescription>
       <StyledLink href="/">⬅ Back</StyledLink>
