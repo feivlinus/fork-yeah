@@ -117,10 +117,10 @@ const data = [
   },
   {
     id: 6,
-    name: "Caprese Salad",
+    name: "Krabby Patty Burger",
     description:
       "A classic Italian salad with fresh tomatoes, mozzarella, and basil.",
-    imageURL: "/recipe-images/pizzasoup.jpeg",
+    imageURL: "/recipe-images/krabby-patty.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "4", ingredient: "ripe tomatoes, sliced" },
@@ -133,10 +133,10 @@ const data = [
   },
   {
     id: 7,
-    name: "Vegetarian Chili",
+    name: "Slimey Burger",
     description:
       "Hearty and flavorful chili loaded with beans, vegetables, and spices.",
-    imageURL: "/recipe-images/pizzasoup.jpeg",
+    imageURL: "/recipe-images/slime-burger.png",
     preparationTime: "40 min",
     ingredients: [
       {
@@ -180,10 +180,10 @@ const data = [
   },
   {
     id: 9,
-    name: "Chocolate Chip Cookies",
+    name: "A variarity of Insects",
     description:
       "Classic homemade chocolate chip cookies that are chewy on the inside and crispy on the outside.",
-    imageURL: "/recipe-images/generic-food.png",
+    imageURL: "/recipe-images/a-variarity-of-insects.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "2 1/4 cups", ingredient: "all-purpose flour" },
