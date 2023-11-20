@@ -10,6 +10,7 @@ export default function RecipeList() {
   return (
     <RecipeStyledUl>
       {recipeData.map((recipe, index, array) =>
+        //If its the last entry of the recipeData add the Link for create Form
         index + 1 === array.length ? (
           <li key="createLink">
             <StyledDiv>
