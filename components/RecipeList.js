@@ -4,23 +4,34 @@ import styled from "styled-components";
 import Link from "next/link";
 
 export default function RecipeList() {
+  //Add empty entry for the Create Recipe Link/Symbol
+  const recipeData = [...data, {}];
+
   return (
     <RecipeStyledUl>
-      {data.map((recipe) => (
-        <li key={recipe.name}>
-          <Link href={`/recipe/${recipe.id}`}>
-            <StyledFigure>
-              <Image
-                src={recipe.imageURL}
-                alt={recipe.name}
-                fill
-                style={{ objectFit: "cover" }}
-              />
-              <StyledFigcaption>{recipe.name}</StyledFigcaption>
-            </StyledFigure>
-          </Link>
-        </li>
-      ))}
+      {recipeData.map((recipe, index, array) =>
+        index + 1 === array.length ? (
+          <li key="createLink">
+            <StyledDiv>
+              <StyledLink href={"/recipe/create"}>✚</StyledLink>
+            </StyledDiv>
+          </li>
+        ) : (
+          <li key={recipe.name}>
+            <Link href={`/recipe/${recipe.id}`}>
+              <StyledFigure>
+                <Image
+                  src={recipe.imageURL}
+                  alt={recipe.name}
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+                <StyledFigcaption>{recipe.name}</StyledFigcaption>
+              </StyledFigure>
+            </Link>
+          </li>
+        )
+      )}
     </RecipeStyledUl>
   );
 }
@@ -51,4 +62,21 @@ const RecipeStyledUl = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
   justify-content: center;
   gap: 2.5vh 5vw;
+`;
+
+const StyledDiv = styled.div`
+  height: 150px;
+  width: 150px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  z-index: -10;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+  font-size: 3rem;
 `;
