@@ -1,4 +1,3 @@
-import data from "@/db/data";
 import { useRouter } from "next/router";
 import RecipeDetails from "@/components/RecipeDetails.js";
 

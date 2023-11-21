@@ -14,9 +14,15 @@ export default function CreatePage({ handleAddRecipe }) {
     //Validate preparedNewRecipeData
 
     //Store preparedNewRecipeData
-    handleAddRecipe(preparedNewRecipeData).then(router.push("/"));
+    handleAddRecipe(preparedNewRecipeData);
+    router.push("/");
   }
 
+  /*
+    Prepares the form data to suit the data schema.
+    Ingredients and their amounts are not linked inside the form.
+    With this function they get linked to together as objects.
+  */
   function prepareFormData(formData) {
     const preparedNewRecipeData = {
       id: uuidv4(),

@@ -7,8 +7,8 @@ export default function App({ Component, pageProps }) {
     defaultValue: [...data],
   });
 
-  async function handleAddRecipe(newData) {
-    await setRecipe([...storedRecipes, newData]);
+  function handleAddRecipe(newData) {
+    setRecipe([...storedRecipes, newData]);
   }
   return (
     <>
