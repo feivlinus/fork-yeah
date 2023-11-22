@@ -1,5 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export function CreateRecipeForm({
   onHandleSubmit,
@@ -56,8 +57,10 @@ export function CreateRecipeForm({
         <textarea name="description" rows="5" />
 
         <button type="submit">Add recipe</button>
-        <button onClick={() => router.push("/")}>Cancel</button>
       </StyledForm>
+      <StyledLinkContainer>
+        <StyledLink href="/">Cancel</StyledLink>
+      </StyledLinkContainer>
     </>
   );
 }
@@ -102,4 +105,31 @@ const StyledErrorMessage = styled.span`
   color: #fff;
   width: 75vw;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+`;
+
+const StyledLinkContainer = styled.div`
+  display: flex;
+  margin-top: 5%;
+  justify-content: center;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  appearance: auto;
+  text-rendering: auto;
+  color: buttontext;
+
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  box-sizing: border-box;
+  background-color: buttonface;
+  margin: 0em;
+  padding-block: 1px;
+  padding-inline: 6px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonborder;
+  border-image: initial;
 `;

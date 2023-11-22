@@ -2,40 +2,36 @@ import Image from "next/image";
 import styled from "styled-components";
 import Link from "next/link";
 
-export default function RecipeList({ storedRecipes }) {
+export default function RecipeList({ recipes }) {
   //Add empty entry for the Create Recipe Link/Symbol
-  const recipeData = [...storedRecipes, {}];
+  const recipeList = [...recipes];
 
   return (
     <RecipeStyledUl>
-      {recipeData.map((recipe, index, array) =>
-        //If its the last entry of the recipeData add the Link for create Form
-        index + 1 === array.length ? (
-          <li key="createLink">
-            <StyledDiv>
-              <StyledLink href={"/recipe/create"}>✚</StyledLink>
-            </StyledDiv>
-          </li>
-        ) : (
-          <li key={recipe.name}>
-            <Link href={`/recipe/${recipe.id}`}>
-              <StyledFigure>
-                <Image
-                  src={
-                    recipe.imageURL
-                      ? recipe.imageURL
-                      : "/recipe-images/generic-food-3.png"
-                  }
-                  alt={recipe.name}
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-                <StyledFigcaption>{recipe.name}</StyledFigcaption>
-              </StyledFigure>
-            </Link>
-          </li>
-        )
-      )}
+      {recipeList.map((recipe) => (
+        <li key={recipe.id}>
+          <Link href={`/recipe/${recipe.id}`}>
+            <StyledFigure>
+              <Image
+                src={
+                  recipe.imageURL
+                    ? recipe.imageURL
+                    : "/recipe-images/generic-food-3.png"
+                }
+                alt={recipe.name}
+                fill
+                style={{ objectFit: "cover" }}
+              />
+              <StyledFigcaption>{recipe.name}</StyledFigcaption>
+            </StyledFigure>
+          </Link>
+        </li>
+      ))}
+      <li key="createLink">
+        <StyledDiv>
+          <StyledLink href={"/recipe/create"}>✚</StyledLink>
+        </StyledDiv>
+      </li>
     </RecipeStyledUl>
   );
 }

@@ -3,21 +3,19 @@ import { CreateRecipeForm } from "@/components/CreateRecipeForm";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export default function CreatePage({ handleAddRecipe, storedRecipes }) {
+export default function CreatePage({ handleAddRecipe, recipes }) {
   const [error, setError] = useState("");
   const [inputValidation, setInputValidation] = useState("");
   const router = useRouter();
 
-  async function handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const newRecipeData = Object.fromEntries(formData);
     const preparedNewRecipeData = prepareFormData(newRecipeData);
 
     //Validate preparedNewRecipeData (only title so far)
-    if (
-      storedRecipes.find((recipe) => recipe.name === preparedNewRecipeData.name)
-    ) {
+    if (recipes.find((recipe) => recipe.name === preparedNewRecipeData.name)) {
       const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;
       setError(errorString);
       setInputValidation("already-created");

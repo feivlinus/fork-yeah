@@ -2,23 +2,23 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function RecipeDetails({ recipeData }) {
+export default function RecipeDetails({ recipeDetails }) {
   return (
     <RecipeCard>
-      <h1> {recipeData.name}</h1>
+      <h1> {recipeDetails.name}</h1>
       <StyledImage
         src={
-          recipeData.imageURL
-            ? recipeData.imageURL
+          recipeDetails.imageURL
+            ? recipeDetails.imageURL
             : "/recipe-images/generic-food-3.png"
         }
-        alt={recipeData.name}
+        alt={recipeDetails.name}
         width={300}
         height={300}
       />
-      <p>⏰ {recipeData.preparationTime}</p>
+      <p>⏰ {recipeDetails.preparationTime}</p>
       <ul>
-        {recipeData.ingredients.map((ingredient) =>
+        {recipeDetails.ingredients.map((ingredient) =>
           ingredient.ingredient ? (
             <li key={ingredient.ingredient}>
               {ingredient.quantity} - {ingredient.ingredient}
@@ -28,7 +28,7 @@ export default function RecipeDetails({ recipeData }) {
           )
         )}
       </ul>
-      <StyledDescription>{recipeData.description}</StyledDescription>
+      <StyledDescription>{recipeDetails.description}</StyledDescription>
       <StyledLink href="/">⬅ Back</StyledLink>
     </RecipeCard>
   );

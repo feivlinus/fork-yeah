@@ -3,12 +3,12 @@ import useLocalStorageState from "use-local-storage-state";
 import data from "@/db/data";
 
 export default function App({ Component, pageProps }) {
-  const [storedRecipes, setRecipe] = useLocalStorageState("recipes", {
+  const [recipes, setRecipes] = useLocalStorageState("recipes", {
     defaultValue: [...data],
   });
 
   function handleAddRecipe(newData) {
-    setRecipe([...storedRecipes, newData]);
+    setRecipes([...recipes, newData]);
   }
   return (
     <>
@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
         handleAddRecipe={handleAddRecipe}
-        storedRecipes={storedRecipes}
+        recipes={recipes}
       />
     </>
   );
