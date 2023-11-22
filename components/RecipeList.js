@@ -66,6 +66,7 @@ const RecipeStyledUl = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
   justify-content: center;
   gap: 2.5vh 5vw;
+  margin-bottom: 5%;
 `;
 
 const StyledDiv = styled.div`

@@ -7,7 +7,6 @@ export function CreateRecipeForm({
   inputValidation,
 }) {
   const router = useRouter();
-  console.log(inputValidation);
   return (
     <>
       <h1>Create new Recipe</h1>

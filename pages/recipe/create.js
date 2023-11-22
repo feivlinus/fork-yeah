@@ -18,9 +18,8 @@ export default function CreatePage({ handleAddRecipe, storedRecipes }) {
     if (
       storedRecipes.find((recipe) => recipe.name === preparedNewRecipeData.name)
     ) {
-      setError(
-        `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`
-      );
+      const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;
+      setError(errorString);
       setInputValidation("already-created");
       return;
     } else {
