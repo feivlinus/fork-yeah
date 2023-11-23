@@ -4,11 +4,10 @@ import Link from "next/link";
 
 export default function RecipeList({ recipes }) {
   //Add empty entry for the Create Recipe Link/Symbol
-  const recipeList = [...recipes];
 
   return (
     <RecipeStyledUl>
-      {recipeList.map((recipe) => (
+      {recipes.map((recipe) => (
         <li key={recipe.id}>
           <Link href={`/recipe/${recipe.id}`}>
             <StyledFigure>
@@ -27,7 +26,7 @@ export default function RecipeList({ recipes }) {
           </Link>
         </li>
       ))}
-      <li key="createLink">
+      <li>
         <StyledDiv>
           <StyledLink href={"/recipe/create"}>✚</StyledLink>
         </StyledDiv>

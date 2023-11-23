@@ -4,7 +4,7 @@ import data from "@/db/data";
 
 export default function App({ Component, pageProps }) {
   const [recipes, setRecipes] = useLocalStorageState("recipes", {
-    defaultValue: [...data],
+    defaultValue: data,
   });
 
   function handleAddRecipe(newData) {

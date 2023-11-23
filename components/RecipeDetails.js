@@ -18,14 +18,13 @@ export default function RecipeDetails({ recipeDetails }) {
       />
       <p>⏰ {recipeDetails.preparationTime}</p>
       <ul>
-        {recipeDetails.ingredients.map((ingredient) =>
-          ingredient.ingredient ? (
-            <li key={ingredient.ingredient}>
-              {ingredient.quantity} - {ingredient.ingredient}
-            </li>
-          ) : (
-            ""
-          )
+        {recipeDetails.ingredients.map(
+          (ingredient) =>
+            ingredient.ingredient && (
+              <li key={ingredient.ingredient}>
+                {ingredient.quantity} - {ingredient.ingredient}
+              </li>
+            )
         )}
       </ul>
       <StyledDescription>{recipeDetails.description}</StyledDescription>
