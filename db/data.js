@@ -1,6 +1,6 @@
 const data = [
   {
-    id: 1,
+    id: "1",
     name: "Pizza Soup",
     description:
       "Nice not so healthy dish but I swear it tastes wonderful. Buy a cheap as possible pizza. Throw everything inside a large pot. Cut the pizza, tomatoes and salami into very tiny chunks. Cook everything together for at least 12 hours.",
@@ -16,7 +16,7 @@ const data = [
     ],
   },
   {
-    id: 2,
+    id: "2",
     name: "Grilled Smiley",
     description:
       "A healthy and colorful salad with quinoa, fresh vegetables, and a tangy vinaigrette.",
@@ -35,7 +35,7 @@ const data = [
     ],
   },
   {
-    id: 3,
+    id: "3",
     name: "Haunted Lasagna",
     description: "Savory beef tacos topped with a refreshing avocado salsa.",
     imageURL: "/recipe-images/haunted-lansagna.png",
@@ -54,7 +54,7 @@ const data = [
     ],
   },
   {
-    id: 4,
+    id: "4",
     name: "Inside-Out Lasagna",
     description:
       "Delicious pasta tossed in a vibrant pesto sauce and topped with sweet cherry tomatoes.",
@@ -72,7 +72,7 @@ const data = [
     ],
   },
   {
-    id: 10,
+    id: "10",
     name: "Low Carb Ananas Soup",
     description:
       "Grilled chicken and colorful vegetables skewers marinated in a savory herb sauce.",
@@ -94,7 +94,7 @@ const data = [
     ],
   },
   {
-    id: 5,
+    id: "5",
     name: "Unicorn Ice",
     description:
       "Quick and flavorful stir-fried shrimp with tender asparagus spears.",
@@ -116,7 +116,7 @@ const data = [
     ],
   },
   {
-    id: 6,
+    id: "6",
     name: "Krabby Patty Burger",
     description:
       "A classic Italian salad with fresh tomatoes, mozzarella, and basil.",
@@ -132,7 +132,7 @@ const data = [
     ],
   },
   {
-    id: 7,
+    id: "7",
     name: "Slimey Burger",
     description:
       "Hearty and flavorful chili loaded with beans, vegetables, and spices.",
@@ -159,7 +159,7 @@ const data = [
     ],
   },
   {
-    id: 8,
+    id: "8",
     name: "Mushroom Risotto",
     description:
       "Creamy and comforting risotto with sautéed mushrooms and Parmesan cheese.",
@@ -179,7 +179,7 @@ const data = [
     ],
   },
   {
-    id: 9,
+    id: "9",
     name: "A variarity of Insects",
     description:
       "Classic homemade chocolate chip cookies that are chewy on the inside and crispy on the outside.",

@@ -1,14 +1,12 @@
-import data from "@/db/data";
 import { useRouter } from "next/router";
 import RecipeDetails from "@/components/RecipeDetails.js";
 
-export default function RecipeDetailsPage() {
+export default function RecipeDetailsPage({ recipes }) {
   const router = useRouter();
   const { id } = router.query;
-  //Remember to remove the toString() because at the database there will be ids as strings
-  const recipeData = data.find((recipe) => recipe.id.toString() === id);
 
-  if (recipeData) {
-    return <RecipeDetails recipeData={recipeData} />;
+  const recipeDetails = recipes.find((recipe) => recipe.id === id);
+  if (recipeDetails) {
+    return <RecipeDetails recipeDetails={recipeDetails} />;
   }
 }
