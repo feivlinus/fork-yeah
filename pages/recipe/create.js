@@ -14,7 +14,6 @@ export default function CreatePage({ handleAddRecipe, recipes }) {
     const newRecipeData = Object.fromEntries(formData);
     const preparedNewRecipeData = prepareFormData(newRecipeData);
 
-    //Validate preparedNewRecipeData (only title so far)
     if (recipes.find((recipe) => recipe.name === preparedNewRecipeData.name)) {
       const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;
       setError(errorString);
@@ -24,16 +23,10 @@ export default function CreatePage({ handleAddRecipe, recipes }) {
       setInputValidation("valid");
     }
 
-    // Store preparedNewRecipeData
     handleAddRecipe(preparedNewRecipeData);
     router.push("/");
   }
 
-  /*
-    Prepares the form data to suit the data schema.
-    Ingredients and their amounts are not linked inside the form.
-    With this function they get linked to together as objects.
-  */
   function prepareFormData(formData) {
     const preparedNewRecipeData = {
       id: uuidv4(),

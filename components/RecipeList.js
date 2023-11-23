@@ -3,35 +3,35 @@ import styled from "styled-components";
 import Link from "next/link";
 
 export default function RecipeList({ recipes }) {
-  //Add empty entry for the Create Recipe Link/Symbol
-
   return (
-    <RecipeStyledUl>
-      {recipes.map((recipe) => (
-        <li key={recipe.id}>
-          <Link href={`/recipe/${recipe.id}`}>
-            <StyledFigure>
-              <Image
-                src={
-                  recipe.imageURL
-                    ? recipe.imageURL
-                    : "/recipe-images/generic-food-3.png"
-                }
-                alt={recipe.name}
-                fill
-                style={{ objectFit: "cover" }}
-              />
-              <StyledFigcaption>{recipe.name}</StyledFigcaption>
-            </StyledFigure>
-          </Link>
-        </li>
-      ))}
-      <li>
-        <StyledDiv>
+    <>
+      <RecipeStyledUl>
+        {recipes.map((recipe) => (
+          <li key={recipe.id}>
+            <Link href={`/recipe/${recipe.id}`}>
+              <StyledFigure>
+                <Image
+                  src={
+                    recipe.imageURL
+                      ? recipe.imageURL
+                      : "/recipe-images/generic-food-3.png"
+                  }
+                  alt={recipe.name}
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+                <StyledFigcaption>{recipe.name}</StyledFigcaption>
+              </StyledFigure>
+            </Link>
+          </li>
+        ))}
+      </RecipeStyledUl>
+      <StyledLinkCardContainer>
+        <StyledLinkCard>
           <StyledLink href={"/recipe/create"}>✚</StyledLink>
-        </StyledDiv>
-      </li>
-    </RecipeStyledUl>
+        </StyledLinkCard>
+      </StyledLinkCardContainer>
+    </>
   );
 }
 
@@ -64,11 +64,14 @@ const RecipeStyledUl = styled.ul`
   margin-bottom: 5%;
 `;
 
-const StyledDiv = styled.div`
+const StyledLinkCardContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledLinkCard = styled.div`
   height: 150px;
   width: 150px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  z-index: -10;
   margin: 0;
   display: flex;
   justify-content: center;
