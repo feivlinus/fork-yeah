@@ -1,9 +1,19 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
-import DeleteRecipe from "./DeleteRecipe";
+import TrashBin from "public/svg/TrashBin.svg";
+import { useRouter } from "next/router";
 
-export default function RecipeDetails({ recipeDetails, handleDeleteRecipe }) {
+export default function RecipeDetails({ recipeDetails, onDeleteRecipe }) {
+  const router = useRouter();
+
+  function handleDeleteAndReroute() {
+    if (confirm("Are you sure you want to delete this recipe?")) {
+      onDeleteRecipe(recipeDetails.id);
+      router.push("/");
+    }
+  }
+
   return (
     <>
       <RecipeCard>
@@ -33,10 +43,9 @@ export default function RecipeDetails({ recipeDetails, handleDeleteRecipe }) {
       </RecipeCard>
       <StyledActionElementsContainer>
         <StyledLink href="/">⬅ Back</StyledLink>
-        <DeleteRecipe
-          onDeleteRecipe={handleDeleteRecipe}
-          recipeId={recipeDetails.id}
-        />
+        <StyledTrashBin
+          onClick={() => handleDeleteAndReroute()}
+        ></StyledTrashBin>
       </StyledActionElementsContainer>
     </>
   );
@@ -72,4 +81,12 @@ const StyledActionElementsContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 1rem;
+`;
+
+const StyledTrashBin = styled(TrashBin)`
+  height: 35px;
+  width: 35px;
+  &:hover {
+    cursor: pointer;
+  }
 `;

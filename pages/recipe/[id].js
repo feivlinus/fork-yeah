@@ -10,7 +10,7 @@ export default function RecipeDetailsPage({ recipes, handleDeleteRecipe }) {
     return (
       <RecipeDetails
         recipeDetails={recipeDetails}
-        handleDeleteRecipe={handleDeleteRecipe}
+        onDeleteRecipe={handleDeleteRecipe}
       />
     );
   }
