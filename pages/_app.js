@@ -10,6 +10,23 @@ export default function App({ Component, pageProps }) {
   function handleAddRecipe(newData) {
     setRecipes([...recipes, newData]);
   }
+
+  const [favoritesList, setFavoriteList] = useLocalStorageState("favorites", {
+    defaultValue: [],
+  });
+
+  function handleSearchFavorite(recipeId) {
+    return favoritesList.includes(recipeId);
+  }
+
+  function handleAddFavorite(recipeId) {
+    if (favoritesList.find((entry) => entry == recipeId)) {
+      setFavoriteList(favoritesList.filter((entry) => entry != recipeId));
+      return;
+    }
+    setFavoriteList([...favoritesList, recipeId]);
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -17,6 +34,8 @@ export default function App({ Component, pageProps }) {
         {...pageProps}
         handleAddRecipe={handleAddRecipe}
         recipes={recipes}
+        onAddFavorite={handleAddFavorite}
+        onSearchFavorite={handleSearchFavorite}
       />
     </>
   );

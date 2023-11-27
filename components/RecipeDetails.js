@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import ToggleFavoriteRecipe from "./ToggleFavoriteRecipe";
 
-export default function RecipeDetails({ recipeDetails }) {
+export default function RecipeDetails({
+  recipeDetails,
+  onAddFavorite,
+  onSearchFavorite,
+}) {
   return (
     <RecipeCard>
       <h1> {recipeDetails.name}</h1>
@@ -16,6 +21,13 @@ export default function RecipeDetails({ recipeDetails }) {
         width={300}
         height={300}
       />
+      <StyledButtonContainer>
+        <ToggleFavoriteRecipe
+          recipeId={recipeDetails.id}
+          onAddFavorite={onAddFavorite}
+          isFavoriteFlag={onSearchFavorite(recipeDetails.id)}
+        />
+      </StyledButtonContainer>
       <p>⏰ {recipeDetails.preparationTime}</p>
       <ul>
         {recipeDetails.ingredients.map(
@@ -52,4 +64,8 @@ const StyledLink = styled(Link)`
   background-color: #000;
   color: #fff;
   text-decoration: none;
+`;
+
+const StyledButtonContainer = styled.div`
+  margin: 5% 5%;
 `;
