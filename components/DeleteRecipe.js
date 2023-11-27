@@ -18,7 +18,7 @@ export default function DeleteRecipe({ onDeleteRecipe, recipeId }) {
 const StyledTrashBin = styled(TrashBin)`
   height: 35px;
   width: 35px;
-  &hover {
+  &:hover {
     cursor: pointer;
   }
 `;
