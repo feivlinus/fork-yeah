@@ -12,7 +12,6 @@ export default function App({ Component, pageProps }) {
   }
 
   function handleDeleteRecipe(id) {
-    console.log("hallo", id);
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
   }
   return (

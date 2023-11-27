@@ -63,6 +63,9 @@ const StyledLink = styled(Link)`
   font-size: 1rem;
   border-radius: 0.4em;
   color: #fff;
+  &hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledActionElementsContainer = styled.div`

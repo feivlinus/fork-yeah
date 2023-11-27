@@ -6,7 +6,7 @@ export default function DeleteRecipe({ onDeleteRecipe, recipeId }) {
   const router = useRouter();
 
   function handleDeleteAndReroute() {
-    if (confirm("Are you sure?")) {
+    if (confirm("Are you sure you want to delete this recipe?")) {
       onDeleteRecipe(recipeId);
       router.push("/");
     }
@@ -18,4 +18,7 @@ export default function DeleteRecipe({ onDeleteRecipe, recipeId }) {
 const StyledTrashBin = styled(TrashBin)`
   height: 35px;
   width: 35px;
+  &hover {
+    cursor: pointer;
+  }
 `;
