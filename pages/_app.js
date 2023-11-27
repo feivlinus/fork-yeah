@@ -19,8 +19,8 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle />
       <Component
         {...pageProps}
-        handleAddRecipe={handleAddRecipe}
-        handleDeleteRecipe={handleDeleteRecipe}
+        onAddRecipe={handleAddRecipe}
+        onDeleteRecipe={handleDeleteRecipe}
         recipes={recipes}
       />
     </>

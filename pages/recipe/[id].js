@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import RecipeDetails from "@/components/RecipeDetails.js";
 
-export default function RecipeDetailsPage({ recipes, handleDeleteRecipe }) {
+export default function RecipeDetailsPage({ recipes, onDeleteRecipe }) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -10,7 +10,7 @@ export default function RecipeDetailsPage({ recipes, handleDeleteRecipe }) {
     return (
       <RecipeDetails
         recipeDetails={recipeDetails}
-        onDeleteRecipe={handleDeleteRecipe}
+        onDeleteRecipe={onDeleteRecipe}
       />
     );
   }

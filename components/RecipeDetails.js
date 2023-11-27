@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import TrashBin from "public/svg/TrashBin.svg";
 import { useRouter } from "next/router";
+import { v4 as uuidv4, v4 } from "uuid";
 
 export default function RecipeDetails({ recipeDetails, onDeleteRecipe }) {
   const router = useRouter();
@@ -32,9 +33,9 @@ export default function RecipeDetails({ recipeDetails, onDeleteRecipe }) {
         <ul>
           {recipeDetails.ingredients.map(
             (ingredient) =>
-              ingredient.ingredient && (
-                <li key={ingredient.ingredient}>
-                  {ingredient.quantity} - {ingredient.ingredient}
+              ingredient.name && (
+                <li key={uuidv4()}>
+                  {ingredient.quantity} - {ingredient.name}
                 </li>
               )
           )}
@@ -43,9 +44,9 @@ export default function RecipeDetails({ recipeDetails, onDeleteRecipe }) {
       </RecipeCard>
       <StyledActionElementsContainer>
         <StyledLink href="/">⬅ Back</StyledLink>
-        <StyledTrashBin
-          onClick={() => handleDeleteAndReroute()}
-        ></StyledTrashBin>
+        <StyledButton type="button" onClick={() => handleDeleteAndReroute()}>
+          <StyledTrashBin></StyledTrashBin>
+        </StyledButton>
       </StyledActionElementsContainer>
     </>
   );
@@ -89,4 +90,7 @@ const StyledTrashBin = styled(TrashBin)`
   &:hover {
     cursor: pointer;
   }
+`;
+const StyledButton = styled.button`
+  all: unset;
 `;
