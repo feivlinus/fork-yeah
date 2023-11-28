@@ -11,7 +11,7 @@ export default function CreateOrUpdateRecipeForm({
   isUpdate,
 }) {
   const router = useRouter();
-  console.log(recipeDetails);
+
   return (
     <>
       <h1>{isUpdate ? "Update Recipe" : "Create new recipe"}</h1>
