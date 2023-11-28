@@ -11,6 +11,7 @@ export default function App({ Component, pageProps }) {
     setRecipes([...recipes, newData]);
   }
 
+<<<<<<< HEAD
   const [favoritesList, setFavoriteList] = useLocalStorageState("favorites", {
     defaultValue: [],
   });
@@ -27,12 +28,18 @@ export default function App({ Component, pageProps }) {
     setFavoriteList([...favoritesList, recipeId]);
   }
 
+=======
+  function handleDeleteRecipe(id) {
+    setRecipes(recipes.filter((recipe) => recipe.id !== id));
+  }
+>>>>>>> main
   return (
     <>
       <GlobalStyle />
       <Component
         {...pageProps}
-        handleAddRecipe={handleAddRecipe}
+        onAddRecipe={handleAddRecipe}
+        onDeleteRecipe={handleDeleteRecipe}
         recipes={recipes}
         onAddFavorite={handleAddFavorite}
         onSearchFavorite={handleSearchFavorite}

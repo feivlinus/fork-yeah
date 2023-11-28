@@ -3,7 +3,7 @@ import { CreateRecipeForm } from "@/components/CreateRecipeForm";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export default function CreatePage({ handleAddRecipe, recipes }) {
+export default function CreatePage({ onAddRecipe, recipes }) {
   const [error, setError] = useState("");
   const [inputValidation, setInputValidation] = useState("");
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function CreatePage({ handleAddRecipe, recipes }) {
       setInputValidation("valid");
     }
 
-    handleAddRecipe(preparedNewRecipeData);
+    onAddRecipe(preparedNewRecipeData);
     router.push("/");
   }
 

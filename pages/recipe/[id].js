@@ -3,6 +3,7 @@ import RecipeDetails from "@/components/RecipeDetails.js";
 
 export default function RecipeDetailsPage({
   recipes,
+  onDeleteRecipe,
   onAddFavorite,
   onSearchFavorite,
 }) {
@@ -14,6 +15,7 @@ export default function RecipeDetailsPage({
     return (
       <RecipeDetails
         recipeDetails={recipeDetails}
+        onDeleteRecipe={onDeleteRecipe}
         onAddFavorite={onAddFavorite}
         onSearchFavorite={onSearchFavorite}
       />
