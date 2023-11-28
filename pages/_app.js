@@ -10,12 +10,17 @@ export default function App({ Component, pageProps }) {
   function handleAddRecipe(newData) {
     setRecipes([...recipes, newData]);
   }
+
+  function handleDeleteRecipe(id) {
+    setRecipes(recipes.filter((recipe) => recipe.id !== id));
+  }
   return (
     <>
       <GlobalStyle />
       <Component
         {...pageProps}
-        handleAddRecipe={handleAddRecipe}
+        onAddRecipe={handleAddRecipe}
+        onDeleteRecipe={handleDeleteRecipe}
         recipes={recipes}
       />
     </>

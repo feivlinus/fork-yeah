@@ -1,12 +1,17 @@
 import { useRouter } from "next/router";
 import RecipeDetails from "@/components/RecipeDetails.js";
 
-export default function RecipeDetailsPage({ recipes }) {
+export default function RecipeDetailsPage({ recipes, onDeleteRecipe }) {
   const router = useRouter();
   const { id } = router.query;
 
   const recipeDetails = recipes.find((recipe) => recipe.id === id);
   if (recipeDetails) {
-    return <RecipeDetails recipeDetails={recipeDetails} />;
+    return (
+      <RecipeDetails
+        recipeDetails={recipeDetails}
+        onDeleteRecipe={onDeleteRecipe}
+      />
+    );
   }
 }
