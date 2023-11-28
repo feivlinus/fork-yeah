@@ -16,10 +16,11 @@ export default function App({ Component, pageProps }) {
   }
 
   function handleUpdateRecipe(updatedRecipe, id) {
-    setRecipes(recipes.filter((recipe) => recipe.id === id));
-
-    console.log("test : ", id);
-    console.log("test : ", updatedRecipe);
+    const recipeIndex = recipes.findIndex((recipe) => recipe.id === id);
+    if (recipeIndex !== -1) {
+      recipes[recipeIndex] = updatedRecipe;
+      setRecipes(recipes);
+    }
   }
 
   return (

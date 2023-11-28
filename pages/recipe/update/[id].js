@@ -8,6 +8,8 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
   const router = useRouter();
   const { id } = router.query;
 
+  const recipeDetails = recipes.find((recipe) => recipe.id === id);
+
   function handleUpdateSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -17,7 +19,7 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
     setInputValidation("valid");
 
     onUpdateRecipe(preparedNewRecipeData, id);
-    // router.push("/");
+    router.push("/");
   }
 
   function prepareFormData(formData) {
@@ -37,7 +39,6 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
     return preparedNewRecipeData;
   }
 
-  const recipeDetails = recipes.find((recipe) => recipe.id === id);
   if (recipeDetails) {
     return (
       <>
