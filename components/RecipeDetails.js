@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 import TrashBin from "public/svg/TrashBin.svg";
+import EditPen from "public/svg/EditPen.svg";
 import { useRouter } from "next/router";
 import { v4 as uuidv4, v4 } from "uuid";
 
@@ -18,6 +19,9 @@ export default function RecipeDetails({ recipeDetails, onDeleteRecipe }) {
   return (
     <>
       <RecipeCard>
+        <StyledEditLink href={`update/${recipeDetails.id}`}>
+          <StyledEditPen></StyledEditPen>
+        </StyledEditLink>
         <h1> {recipeDetails.name}</h1>
         <StyledImage
           src={
@@ -56,6 +60,7 @@ const RecipeCard = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 
 const StyledImage = styled(Image)`
@@ -93,4 +98,19 @@ const StyledTrashBin = styled(TrashBin)`
 `;
 const StyledButton = styled.button`
   all: unset;
+`;
+
+const StyledEditLink = styled(Link)`
+  all: unset;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+`;
+
+const StyledEditPen = styled(EditPen)`
+  height: 25px;
+  width: 35px;
+  &:hover {
+    cursor: pointer;
+  }
 `;

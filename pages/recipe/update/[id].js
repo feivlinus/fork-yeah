@@ -1,35 +1,28 @@
-import { v4 as uuidv4, v4 } from "uuid";
-import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
-import { useState } from "react";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
 
-export default function CreatePage({ onAddRecipe, recipes }) {
+export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
   const [error, setError] = useState("");
   const [inputValidation, setInputValidation] = useState("");
   const router = useRouter();
+  const { id } = router.query;
 
-  function handleSubmit(event) {
+  function handleUpdateSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const newRecipeData = Object.fromEntries(formData);
     const preparedNewRecipeData = prepareFormData(newRecipeData);
 
-    if (recipes.find((recipe) => recipe.name === preparedNewRecipeData.name)) {
-      const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;
-      setError(errorString);
-      setInputValidation("already-created");
-      return;
-    } else {
-      setInputValidation("valid");
-    }
+    setInputValidation("valid");
 
-    onAddRecipe(preparedNewRecipeData);
-    router.push("/");
+    onUpdateRecipe(preparedNewRecipeData, id);
+    // router.push("/");
   }
 
   function prepareFormData(formData) {
     const preparedNewRecipeData = {
-      id: uuidv4(),
+      id: id,
       name: formData.title,
       preparationTime: formData.duration,
       imageURL: formData.imgurl,
@@ -44,14 +37,18 @@ export default function CreatePage({ onAddRecipe, recipes }) {
     return preparedNewRecipeData;
   }
 
-  return (
-    <>
-      <CreateOrUpdateRecipeForm
-        onHandleSubmit={handleSubmit}
-        errorMessage={error}
-        inputValidation={inputValidation}
-        isUpdate={false}
-      />
-    </>
-  );
+  const recipeDetails = recipes.find((recipe) => recipe.id === id);
+  if (recipeDetails) {
+    return (
+      <>
+        <CreateOrUpdateRecipeForm
+          recipeDetails={recipeDetails}
+          onUpdateRecipe={handleUpdateSubmit}
+          isUpdate={true}
+          errorMessage={error}
+          inputValidation={inputValidation}
+        />
+      </>
+    );
+  }
 }

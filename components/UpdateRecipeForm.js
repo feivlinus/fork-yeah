@@ -2,15 +2,18 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export function CreateRecipeForm({
-  onHandleSubmit,
+export default function UpdateRecipeForm({
   errorMessage,
   inputValidation,
+  recipeDetails,
+  onUpdateRecipe,
 }) {
   const router = useRouter();
+  console.log(recipeDetails);
   return (
     <>
-      <h1>Create new Recipe</h1>
+      <h1>Update Recipe</h1>
+
       {errorMessage ? (
         <StyledErrorMessageContainer>
           <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
@@ -18,7 +21,7 @@ export function CreateRecipeForm({
       ) : (
         ""
       )}
-      <StyledForm onSubmit={onHandleSubmit}>
+      <StyledForm onSubmit={onUpdateRecipe}>
         <label htmlFor="title">Title:</label>
         <StyledTitleInput
           type="text"
@@ -28,35 +31,89 @@ export function CreateRecipeForm({
           maxLength={75}
           autoFocus
           $titleInput={inputValidation}
+          defaultValue={recipeDetails.name ?? ""}
         />
 
         <label htmlFor="duration">Cooking duration:</label>
-        <input type="text" id="duration" name="duration" />
+        <input
+          type="text"
+          id="duration"
+          name="duration"
+          defaultValue={recipeDetails.preparationTime ?? ""}
+        />
 
         <label htmlFor="imgurl">Image Url</label>
-        <input type="url" id="imgurl" name="imgurl" />
+        <input
+          type="url"
+          id="imgurl"
+          name="imgurl"
+          defaultValue={recipeDetails.imageURL ?? ""}
+        />
 
         <StyledFieldSet>
           <legend>Ingredients:</legend>
-          <input type="text" name="amount1" placeholder="Amount" required />
+          <input
+            type="text"
+            name="amount1"
+            placeholder="Amount"
+            required
+            defaultValue={recipeDetails.ingredients[0].quantity ?? ""}
+          />
           <input
             type="text"
             name="ingredient1"
             placeholder="Ingredient"
             required
+            defaultValue={recipeDetails.ingredients[0].name ?? ""}
           />
-          <input type="text" name="amount2" placeholder="Amount" />
-          <input type="text" name="ingredient2" placeholder="Ingredient" />
-          <input type="text" name="amount3" placeholder="Amount" />
-          <input type="text" name="ingredient3" placeholder="Ingredient" />
-          <input type="text" name="amount4" placeholder="Amount" />
-          <input type="text" name="ingredient4" placeholder="Ingredient" />
+          <input
+            type="text"
+            name="amount2"
+            placeholder="Amount"
+            defaultValue={recipeDetails.ingredients[1].quantity ?? ""}
+          />
+          <input
+            type="text"
+            name="ingredient2"
+            placeholder="Ingredient"
+            defaultValue={recipeDetails.ingredients[1].name ?? ""}
+          />
+
+          <input
+            type="text"
+            name="amount3"
+            placeholder="Amount"
+            defaultValue={recipeDetails.ingredients[2].quantity ?? ""}
+          />
+          <input
+            type="text"
+            name="ingredient3"
+            placeholder="Ingredient"
+            defaultValue={recipeDetails.ingredients[2].name ?? ""}
+          />
+
+          <input
+            type="text"
+            name="amount4"
+            placeholder="Amount"
+            defaultValue={recipeDetails.ingredients[3].quantity ?? ""}
+          />
+          <input
+            type="text"
+            name="ingredient4"
+            placeholder="Ingredient"
+            defaultValue={recipeDetails.ingredients[3].name ?? ""}
+          />
         </StyledFieldSet>
 
         <label htmlFor="description">Description:</label>
-        <textarea name="description" rows="5" />
+        <textarea
+          name="description"
+          rows="5"
+          defaultValue={recipeDetails.description ?? ""}
+        />
 
-        <button type="submit">Add recipe</button>
+        <button type="submit">Save Changes</button>
       </StyledForm>
       <StyledLinkContainer>
         <StyledLink href="/">Cancel</StyledLink>

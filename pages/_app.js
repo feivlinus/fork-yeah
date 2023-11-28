@@ -14,6 +14,14 @@ export default function App({ Component, pageProps }) {
   function handleDeleteRecipe(id) {
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
   }
+
+  function handleUpdateRecipe(updatedRecipe, id) {
+    setRecipes(recipes.filter((recipe) => recipe.id === id));
+
+    console.log("test : ", id);
+    console.log("test : ", updatedRecipe);
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -21,6 +29,7 @@ export default function App({ Component, pageProps }) {
         {...pageProps}
         onAddRecipe={handleAddRecipe}
         onDeleteRecipe={handleDeleteRecipe}
+        onUpdateRecipe={handleUpdateRecipe}
         recipes={recipes}
       />
     </>
