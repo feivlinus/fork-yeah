@@ -33,8 +33,7 @@ export default function ToggleFavoriteRecipe({
 
 const StyledButton = styled.button`
   all: unset;
-  display: block;
-  //-webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
   &:hover {
     cursor: pointer;
   }
