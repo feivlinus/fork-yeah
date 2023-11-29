@@ -1,20 +1,26 @@
 import styled from "styled-components";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 export default function CreateOrUpdateRecipeForm({
   errorMessage,
   inputValidation,
-  recipeDetails,
-  onUpdateRecipe,
-  onHandleSubmit,
-  isUpdate,
+  recipeDetails = {},
+  onSubmit,
 }) {
-  const router = useRouter();
+  const formTitle =
+    Object.keys(recipeDetails).length === 0
+      ? "Create new recipe"
+      : "Update Recipe";
+  const formButtonTitle =
+    Object.keys(recipeDetails).length === 0 ? "Add Recipe" : "Save Changes";
+  const abortLinkUrl =
+    Object.keys(recipeDetails).length === 0
+      ? "/"
+      : `/recipe/${recipeDetails.id}`;
 
   return (
     <>
-      <h1>{isUpdate ? "Update Recipe" : "Create new recipe"}</h1>
+      <h1>{formTitle}</h1>
 
       {errorMessage ? (
         <StyledErrorMessageContainer>
@@ -23,7 +29,7 @@ export default function CreateOrUpdateRecipeForm({
       ) : (
         ""
       )}
-      <StyledForm onSubmit={isUpdate ? onUpdateRecipe : onHandleSubmit}>
+      <StyledForm onSubmit={onSubmit}>
         <label htmlFor="title">Title:</label>
         <StyledTitleInput
           type="text"
@@ -33,7 +39,7 @@ export default function CreateOrUpdateRecipeForm({
           maxLength={75}
           autoFocus
           $titleInput={inputValidation}
-          defaultValue={isUpdate ? recipeDetails.name ?? "" : null}
+          defaultValue={recipeDetails.name}
         />
 
         <label htmlFor="duration">Cooking duration:</label>
@@ -41,7 +47,7 @@ export default function CreateOrUpdateRecipeForm({
           type="text"
           id="duration"
           name="duration"
-          defaultValue={isUpdate ? recipeDetails.preparationTime ?? "" : null}
+          defaultValue={recipeDetails.preparationTime}
         />
 
         <label htmlFor="imgurl">Image Url</label>
@@ -49,7 +55,7 @@ export default function CreateOrUpdateRecipeForm({
           type="url"
           id="imgurl"
           name="imgurl"
-          defaultValue={isUpdate ? recipeDetails.imageURL ?? "" : null}
+          defaultValue={recipeDetails.imageURL}
         />
 
         <StyledFieldSet>
@@ -60,7 +66,9 @@ export default function CreateOrUpdateRecipeForm({
             placeholder="Amount"
             required
             defaultValue={
-              isUpdate ? recipeDetails.ingredients[0].quantity ?? "" : null
+              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
+                ? recipeDetails.ingredients[0].quantity
+                : ""
             }
           />
           <input
@@ -69,7 +77,9 @@ export default function CreateOrUpdateRecipeForm({
             placeholder="Ingredient"
             required
             defaultValue={
-              isUpdate ? recipeDetails.ingredients[0].name ?? "" : null
+              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
+                ? recipeDetails.ingredients[0].name
+                : ""
             }
           />
           <input
@@ -77,7 +87,9 @@ export default function CreateOrUpdateRecipeForm({
             name="amount2"
             placeholder="Amount"
             defaultValue={
-              isUpdate ? recipeDetails.ingredients[1].quantity ?? "" : null
+              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
+                ? recipeDetails.ingredients[1].quantity
+                : ""
             }
           />
           <input
@@ -85,7 +97,9 @@ export default function CreateOrUpdateRecipeForm({
             name="ingredient2"
             placeholder="Ingredient"
             defaultValue={
-              isUpdate ? recipeDetails.ingredients[1].name ?? "" : null
+              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
+                ? recipeDetails.ingredients[1].name
+                : ""
             }
           />
 
@@ -94,7 +108,9 @@ export default function CreateOrUpdateRecipeForm({
             name="amount3"
             placeholder="Amount"
             defaultValue={
-              isUpdate ? recipeDetails.ingredients[2].quantity ?? "" : null
+              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
+                ? recipeDetails.ingredients[2].quantity
+                : ""
             }
           />
           <input
@@ -102,7 +118,9 @@ export default function CreateOrUpdateRecipeForm({
             name="ingredient3"
             placeholder="Ingredient"
             defaultValue={
-              isUpdate ? recipeDetails.ingredients[2].name ?? "" : null
+              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
+                ? recipeDetails.ingredients[2].name
+                : ""
             }
           />
 
@@ -111,7 +129,9 @@ export default function CreateOrUpdateRecipeForm({
             name="amount4"
             placeholder="Amount"
             defaultValue={
-              isUpdate ? recipeDetails.ingredients[3].quantity ?? "" : null
+              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
+                ? recipeDetails.ingredients[3].quantity
+                : ""
             }
           />
           <input
@@ -119,7 +139,9 @@ export default function CreateOrUpdateRecipeForm({
             name="ingredient4"
             placeholder="Ingredient"
             defaultValue={
-              isUpdate ? recipeDetails.ingredients[3].name ?? "" : null
+              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
+                ? recipeDetails.ingredients[3].name
+                : ""
             }
           />
         </StyledFieldSet>
@@ -128,15 +150,13 @@ export default function CreateOrUpdateRecipeForm({
         <textarea
           name="description"
           rows="5"
-          defaultValue={isUpdate ? recipeDetails.description ?? "" : null}
+          defaultValue={recipeDetails.description}
         />
 
-        <button type="submit">
-          {isUpdate ? "Save Changes" : "Add Recipe"}
-        </button>
+        <button type="submit">{formButtonTitle}</button>
       </StyledForm>
       <StyledLinkContainer>
-        <StyledLink href="/">Cancel</StyledLink>
+        <StyledLink href={abortLinkUrl}>Cancel</StyledLink>
       </StyledLinkContainer>
     </>
   );

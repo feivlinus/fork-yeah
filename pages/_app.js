@@ -15,12 +15,12 @@ export default function App({ Component, pageProps }) {
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
   }
 
-  function handleUpdateRecipe(updatedRecipe, id) {
-    const recipeIndex = recipes.findIndex((recipe) => recipe.id === id);
-    if (recipeIndex !== -1) {
-      recipes[recipeIndex] = updatedRecipe;
-      setRecipes(recipes);
-    }
+  function handleUpdateRecipe(updatedRecipe) {
+    setRecipes(
+      recipes.map((recipe) =>
+        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      )
+    );
   }
 
   return (

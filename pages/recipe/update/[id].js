@@ -30,10 +30,10 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
       imageURL: formData.imgurl,
       description: formData.description,
       ingredients: [
-        { quantity: formData.amount1, ingredient: formData.ingredient1 },
-        { quantity: formData.amount2, ingredient: formData.ingredient2 },
-        { quantity: formData.amount3, ingredient: formData.ingredient3 },
-        { quantity: formData.amount4, ingredient: formData.ingredient4 },
+        { quantity: formData.amount1, name: formData.ingredient1 },
+        { quantity: formData.amount2, name: formData.ingredient2 },
+        { quantity: formData.amount3, name: formData.ingredient3 },
+        { quantity: formData.amount4, name: formData.ingredient4 },
       ],
     };
     return preparedNewRecipeData;
@@ -44,8 +44,7 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
       <>
         <CreateOrUpdateRecipeForm
           recipeDetails={recipeDetails}
-          onUpdateRecipe={handleUpdateSubmit}
-          isUpdate={true}
+          onSubmit={handleUpdateSubmit}
           errorMessage={error}
           inputValidation={inputValidation}
         />
