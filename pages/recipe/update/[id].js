@@ -19,6 +19,7 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
 
     setInputValidation("valid");
     onUpdateRecipe(preparedNewRecipeData, id);
+    router.push(`/recipe/${id}`);
   }
 
   if (recipeDetails) {
