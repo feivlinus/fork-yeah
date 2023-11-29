@@ -24,15 +24,12 @@ const StyledNavigationContainer = styled.div`
   display: flex;
   width: 100%;
   height: 3.5rem;
-  padding: 0.6875rem 1.5625rem;
   justify-content: center;
-  align-items: flex-start;
-  gap: 4.6875rem;
+  align-items: center;
+  gap: 4.5rem;
   flex-shrink: 0;
-  gap: 4.5 rem;
   background: #fff;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25) inset;
-  position: absolute;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25) inset;
   bottom: 0;
   position: fixed;
   z-index: 50;
