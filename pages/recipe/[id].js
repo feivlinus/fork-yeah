@@ -1,7 +1,12 @@
 import { useRouter } from "next/router";
 import RecipeDetails from "@/components/RecipeDetails.js";
 
-export default function RecipeDetailsPage({ recipes, onDeleteRecipe }) {
+export default function RecipeDetailsPage({
+  recipes,
+  onDeleteRecipe,
+  onAddFavorite,
+  onSearchFavorite,
+}) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -11,6 +16,8 @@ export default function RecipeDetailsPage({ recipes, onDeleteRecipe }) {
       <RecipeDetails
         recipeDetails={recipeDetails}
         onDeleteRecipe={onDeleteRecipe}
+        onAddFavorite={onAddFavorite}
+        onSearchFavorite={onSearchFavorite}
       />
     );
   }

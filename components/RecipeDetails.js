@@ -4,8 +4,14 @@ import Link from "next/link";
 import TrashBin from "public/svg/TrashBin.svg";
 import { useRouter } from "next/router";
 import { v4 as uuidv4, v4 } from "uuid";
+import ToggleFavoriteRecipe from "./ToggleFavoriteRecipe";
 
-export default function RecipeDetails({ recipeDetails, onDeleteRecipe }) {
+export default function RecipeDetails({
+  recipeDetails,
+  onDeleteRecipe,
+  onAddFavorite,
+  onSearchFavorite,
+}) {
   const router = useRouter();
 
   function handleDeleteAndReroute() {
@@ -29,6 +35,13 @@ export default function RecipeDetails({ recipeDetails, onDeleteRecipe }) {
           width={300}
           height={300}
         />
+        <StyledButtonContainer>
+          <ToggleFavoriteRecipe
+            recipeId={recipeDetails.id}
+            onAddFavorite={onAddFavorite}
+            isFavoriteFlag={onSearchFavorite(recipeDetails.id)}
+          />
+        </StyledButtonContainer>
         <p>⏰ {recipeDetails.preparationTime}</p>
         <ul>
           {recipeDetails.ingredients.map(
@@ -93,4 +106,8 @@ const StyledTrashBin = styled(TrashBin)`
 `;
 const StyledButton = styled.button`
   all: unset;
+`;
+
+const StyledButtonContainer = styled.div`
+  margin: 5% 5%;
 `;
