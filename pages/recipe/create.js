@@ -1,7 +1,7 @@
-import { v4 as uuidv4, v4 } from "uuid";
 import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { prepareFormData } from "@/utils/utils";
 
 export default function CreatePage({ onAddRecipe, recipes }) {
   const [error, setError] = useState("");
@@ -25,23 +25,6 @@ export default function CreatePage({ onAddRecipe, recipes }) {
 
     onAddRecipe(preparedNewRecipeData);
     router.push("/");
-  }
-
-  function prepareFormData(formData) {
-    const preparedNewRecipeData = {
-      id: uuidv4(),
-      name: formData.title,
-      preparationTime: formData.duration,
-      imageURL: formData.imgurl,
-      description: formData.description,
-      ingredients: [
-        { quantity: formData.amount1, name: formData.ingredient1 },
-        { quantity: formData.amount2, name: formData.ingredient2 },
-        { quantity: formData.amount3, name: formData.ingredient3 },
-        { quantity: formData.amount4, name: formData.ingredient4 },
-      ],
-    };
-    return preparedNewRecipeData;
   }
 
   return (

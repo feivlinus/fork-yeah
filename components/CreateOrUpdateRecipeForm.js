@@ -7,28 +7,21 @@ export default function CreateOrUpdateRecipeForm({
   recipeDetails = {},
   onSubmit,
 }) {
-  const formTitle =
-    Object.keys(recipeDetails).length === 0
-      ? "Create new recipe"
-      : "Update Recipe";
-  const formButtonTitle =
-    Object.keys(recipeDetails).length === 0 ? "Add Recipe" : "Save Changes";
-  const abortLinkUrl =
-    Object.keys(recipeDetails).length === 0
-      ? "/"
-      : `/recipe/${recipeDetails.id}`;
+  const isCreateNewRecipe = Object.keys(recipeDetails).length === 0;
+  const formTitle = isCreateNewRecipe ? "Create new recipe" : "Update Recipe";
+  const formButtonTitle = isCreateNewRecipe ? "Add Recipe" : "Save Changes";
+  const abortLinkUrl = isCreateNewRecipe ? "/" : `/recipe/${recipeDetails.id}`;
 
   return (
     <>
       <h1>{formTitle}</h1>
 
-      {errorMessage ? (
+      {errorMessage && (
         <StyledErrorMessageContainer>
           <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
         </StyledErrorMessageContainer>
-      ) : (
-        ""
       )}
+
       <StyledForm onSubmit={onSubmit}>
         <label htmlFor="title">Title:</label>
         <StyledTitleInput
