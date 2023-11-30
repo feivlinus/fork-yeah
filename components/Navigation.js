@@ -13,6 +13,7 @@ export default function Navigation() {
         <NavigationIcons variant={"create"} color={"#BABABA"} size={32} />
       </StyledNavigationLink>
 
+      {/* THIS LINE OF CODE IS COMMENTED OUT,IT WILL COME IN THE NEXT USER STORY WHEN WE DIRECT THE USER TO THE FAVORITES PAGE */}
       {/* <Link href="/">
         <NavigationIcons variant={"favorites"} color={"#BABABA"} size={32} />
       </Link> */}
