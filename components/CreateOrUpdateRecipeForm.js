@@ -44,6 +44,7 @@ export default function CreateOrUpdateRecipeForm({
         />
 
         <label htmlFor="imgurl">Image Url</label>
+
         <input
           type="url"
           id="imgurl"

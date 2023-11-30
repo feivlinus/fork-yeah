@@ -19,9 +19,6 @@ export default function RecipeDetails({ recipeDetails, onDeleteRecipe }) {
   return (
     <>
       <RecipeCard>
-        <StyledEditLink href={`update/${recipeDetails.id}`}>
-          <StyledEditPen></StyledEditPen>
-        </StyledEditLink>
         <h1> {recipeDetails.name}</h1>
         <StyledImage
           src={
@@ -48,9 +45,14 @@ export default function RecipeDetails({ recipeDetails, onDeleteRecipe }) {
       </RecipeCard>
       <StyledActionElementsContainer>
         <StyledLink href="/">⬅ Back</StyledLink>
+
         <StyledButton type="button" onClick={() => handleDeleteAndReroute()}>
           <StyledTrashBin></StyledTrashBin>
         </StyledButton>
+
+        <StyledEditLink href={`update/${recipeDetails.id}`}>
+          <StyledEditPen></StyledEditPen>
+        </StyledEditLink>
       </StyledActionElementsContainer>
     </>
   );
@@ -102,13 +104,12 @@ const StyledButton = styled.button`
 
 const StyledEditLink = styled(Link)`
   all: unset;
-  position: absolute;
   top: 8px;
   right: 8px;
 `;
 
 const StyledEditPen = styled(EditPen)`
-  height: 25px;
+  height: 32px;
   width: 35px;
   &:hover {
     cursor: pointer;
