@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import NavigationIcons from "./Icons/NavigationIcons";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Navigation() {
+  const router = useRouter();
+  const pathName = router.pathname;
   return (
     <StyledFooterContainer>
       <nav>
@@ -21,7 +24,7 @@ export default function Navigation() {
             <StyledNavigationLink href="/favorites">
               <NavigationIcons
                 variant={"favorites"}
-                color={"#BABABA"}
+                color={pathName === "/favorites" ? "#FF3B3B" : "#BABABA"}
                 size={32}
               />
             </StyledNavigationLink>
@@ -54,7 +57,6 @@ const StyledFooterContainer = styled.footer`
 `;
 
 const StyledNavigationLink = styled(Link)`
-  &:hover,
   &:active {
     svg {
       fill: #6e6e6e;
