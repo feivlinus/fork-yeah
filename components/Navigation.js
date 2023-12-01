@@ -4,36 +4,49 @@ import Link from "next/link";
 
 export default function Navigation() {
   return (
-    <StyledNavigationContainer>
-      <StyledNavigationLink href="/">
-        <NavigationIcons variant={"home"} color={"#BABABA"} size={32} />
-      </StyledNavigationLink>
+    <StyledFooterContainer>
+      <nav>
+        <ul>
+          <li>
+            <StyledNavigationLink href="/">
+              <NavigationIcons variant={"home"} color={"#BABABA"} size={32} />
+            </StyledNavigationLink>
+          </li>
+          <li>
+            <StyledNavigationLink href="/recipe/create">
+              <NavigationIcons variant={"create"} color={"#BABABA"} size={32} />
+            </StyledNavigationLink>
+          </li>
 
-      <StyledNavigationLink href="/recipe/create">
-        <NavigationIcons variant={"create"} color={"#BABABA"} size={32} />
-      </StyledNavigationLink>
-
-      {/* THIS LINE OF CODE IS COMMENTED OUT,IT WILL COME IN THE NEXT USER STORY WHEN WE DIRECT THE USER TO THE FAVORITES PAGE */}
-      {/* <Link href="/">
+          {/* THIS LINE OF CODE IS COMMENTED OUT,IT WILL COME IN THE NEXT USER STORY WHEN WE DIRECT THE USER TO THE FAVORITES PAGE */}
+          {/* <Link href="/">
         <NavigationIcons variant={"favorites"} color={"#BABABA"} size={32} />
       </Link> */}
-    </StyledNavigationContainer>
+        </ul>
+      </nav>
+    </StyledFooterContainer>
   );
 }
 
-const StyledNavigationContainer = styled.div`
+const StyledFooterContainer = styled.footer`
   display: flex;
   width: 100%;
-  height: 3.5rem;
+  padding: 0.75rem;
   justify-content: center;
-  align-items: center;
-  gap: 4.5rem;
   flex-shrink: 0;
   background: #fff;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25) inset;
   bottom: 0;
   position: fixed;
   z-index: 50;
+  ul {
+    all: unset;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4.5rem;
+  }
 `;
 
 const StyledNavigationLink = styled(Link)`
