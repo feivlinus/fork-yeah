@@ -30,6 +30,15 @@ export default function App({ Component, pageProps }) {
   function handleDeleteRecipe(id) {
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
   }
+
+  function handleUpdateRecipe(updatedRecipe) {
+    setRecipes(
+      recipes.map((recipe) =>
+        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      )
+    );
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -37,6 +46,7 @@ export default function App({ Component, pageProps }) {
         {...pageProps}
         onAddRecipe={handleAddRecipe}
         onDeleteRecipe={handleDeleteRecipe}
+        onUpdateRecipe={handleUpdateRecipe}
         recipes={recipes}
         onAddFavorite={handleAddFavorite}
         onSearchFavorite={handleSearchFavorite}
