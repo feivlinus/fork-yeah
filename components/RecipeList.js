@@ -1,13 +1,25 @@
 import Image from "next/image";
 import styled from "styled-components";
 import Link from "next/link";
+import ToggleFavoriteRecipe from "./ToggleFavoriteRecipe";
 
-export default function RecipeList({ recipes }) {
+export default function RecipeList({
+  recipes,
+  onAddFavorite,
+  onSearchFavorite,
+}) {
   return (
     <>
       <RecipeStyledUl>
         {recipes.map((recipe) => (
-          <li key={recipe.id}>
+          <StyledListItem key={recipe.id}>
+            <StyledFavoriteButtonContainer>
+              <ToggleFavoriteRecipe
+                recipeId={recipe.id}
+                onAddFavorite={onAddFavorite}
+                isFavoriteFlag={onSearchFavorite(recipe.id)}
+              />
+            </StyledFavoriteButtonContainer>
             <Link href={`/recipe/${recipe.id}`}>
               <StyledFigure>
                 <Image
@@ -23,7 +35,7 @@ export default function RecipeList({ recipes }) {
                 <StyledFigcaption>{recipe.name}</StyledFigcaption>
               </StyledFigure>
             </Link>
-          </li>
+          </StyledListItem>
         ))}
       </RecipeStyledUl>
       <StyledLinkCardContainer>
@@ -34,6 +46,17 @@ export default function RecipeList({ recipes }) {
     </>
   );
 }
+
+const StyledListItem = styled.li`
+  position: relative;
+`;
+
+const StyledFavoriteButtonContainer = styled.div`
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  z-index: 20;
+`;
 
 const StyledFigure = styled.figure`
   position: relative;

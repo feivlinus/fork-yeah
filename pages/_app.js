@@ -11,6 +11,22 @@ export default function App({ Component, pageProps }) {
     setRecipes([...recipes, newData]);
   }
 
+  const [favoritesList, setFavoriteList] = useLocalStorageState("favorites", {
+    defaultValue: [],
+  });
+
+  function handleSearchFavorite(recipeId) {
+    return favoritesList.includes(recipeId);
+  }
+
+  function handleAddFavorite(recipeId) {
+    if (favoritesList.find((entry) => entry == recipeId)) {
+      setFavoriteList(favoritesList.filter((entry) => entry != recipeId));
+      return;
+    }
+    setFavoriteList([...favoritesList, recipeId]);
+  }
+
   function handleDeleteRecipe(id) {
     setRecipes(recipes.filter((recipe) => recipe.id !== id));
   }
@@ -32,6 +48,8 @@ export default function App({ Component, pageProps }) {
         onDeleteRecipe={handleDeleteRecipe}
         onUpdateRecipe={handleUpdateRecipe}
         recipes={recipes}
+        onAddFavorite={handleAddFavorite}
+        onSearchFavorite={handleSearchFavorite}
       />
     </>
   );
