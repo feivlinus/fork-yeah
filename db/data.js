@@ -4,7 +4,8 @@ const data = [
     name: "Pizza Soup",
     description:
       "Nice not so healthy dish but I swear it tastes wonderful. Buy a cheap as possible pizza. Throw everything inside a large pot. Cut the pizza, tomatoes and salami into very tiny chunks. Cook everything together for at least 12 hours.",
-    imageURL: "/recipe-images/pizzasoup.jpeg",
+    imageURL:
+      "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358482/recipe-images/pizzasoup_m4goru.jpg",
     preparationTime: "12 hours",
     ingredients: [
       { quantity: "4", name: "salmon fillets" },
@@ -18,7 +19,8 @@ const data = [
     name: "Grilled Smiley",
     description:
       "A healthy and colorful salad with quinoa, fresh vegetables, and a tangy vinaigrette.",
-    imageURL: "/recipe-images/grilled-smiley.png",
+    imageURL:
+      "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358484/recipe-images/grilled-smiley_ns7icw.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 cup", name: "quinoa, cooked" },
@@ -36,7 +38,8 @@ const data = [
     id: "3",
     name: "Haunted Lasagna",
     description: "Savory beef tacos topped with a refreshing avocado salsa.",
-    imageURL: "/recipe-images/haunted-lansagna.png",
+    imageURL:
+      "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358483/recipe-images/haunted-lansagna_yahano.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", name: "ground beef" },
@@ -50,7 +53,8 @@ const data = [
     name: "Inside-Out Lasagna",
     description:
       "Delicious pasta tossed in a vibrant pesto sauce and topped with sweet cherry tomatoes.",
-    imageURL: "/recipe-images/inside-out-lasagna.png",
+    imageURL:
+      "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358483/recipe-images/inside-out-lasagna_pteejo.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "12 oz", name: "penne pasta, cooked" },
@@ -64,7 +68,8 @@ const data = [
     name: "Low Carb Ananas Soup",
     description:
       "Grilled chicken and colorful vegetables skewers marinated in a savory herb sauce.",
-    imageURL: "/recipe-images/low-carb-ananas-soup.png",
+    imageURL:
+      "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358484/recipe-images/low-carb-ananas-soup_c7yf5o.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", name: "chicken breast, cut into cubes" },
@@ -84,7 +89,8 @@ const data = [
     name: "Unicorn Ice",
     description:
       "Quick and flavorful stir-fried shrimp with tender asparagus spears.",
-    imageURL: "/recipe-images/unicorn-ice.jpeg",
+    imageURL:
+      "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358483/recipe-images/unicorn-ice_ecd6t9.jpg",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", name: "shrimp, peeled and deveined" },
@@ -103,7 +109,8 @@ const data = [
     name: "Krabby Patty Burger",
     description:
       "A classic Italian salad with fresh tomatoes, mozzarella, and basil.",
-    imageURL: "/recipe-images/krabby-patty.png",
+    imageURL:
+      "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358483/recipe-images/krabby-patty_oxmrbi.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "4", name: "ripe tomatoes, sliced" },
@@ -117,7 +124,8 @@ const data = [
     name: "Slimey Burger",
     description:
       "Hearty and flavorful chili loaded with beans, vegetables, and spices.",
-    imageURL: "/recipe-images/slime-burger.png",
+    imageURL:
+      "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358484/recipe-images/slime-burger_ykhxje.png",
     preparationTime: "40 min",
     ingredients: [
       {
@@ -140,7 +148,8 @@ const data = [
     name: "Mushroom Risotto",
     description:
       "Creamy and comforting risotto with sautéed mushrooms and Parmesan cheese.",
-    imageURL: "/recipe-images/generic-food-1.png",
+    imageURL:
+      "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358485/recipe-images/generic-food-1_dopnzr.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 cup", name: "Arborio rice" },
@@ -154,7 +163,8 @@ const data = [
     name: "A variarity of Insects",
     description:
       "Classic homemade chocolate chip cookies that are chewy on the inside and crispy on the outside.",
-    imageURL: "/recipe-images/a-variarity-of-insects.png",
+    imageURL:
+      "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358482/recipe-images/a-variarity-of-insects_foavqq.png",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "2 1/4 cups", name: "all-purpose flour" },
