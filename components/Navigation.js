@@ -60,4 +60,5 @@ const StyledNavigationLink = styled(Link)`
       fill: #6e6e6e;
     }
   }
+  -webkit-tap-highlight-color: transparent;
 `;
