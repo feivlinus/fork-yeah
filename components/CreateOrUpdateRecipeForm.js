@@ -46,10 +46,10 @@ export default function CreateOrUpdateRecipeForm({
         <label htmlFor="imgurl">Image Url</label>
 
         <input
-          type="url"
-          id="imgurl"
-          name="imgurl"
-          defaultValue={recipeDetails.imageURL}
+          type="file"
+          id="file"
+          name="file"
+          accept="image/jpeg, image/png, image/jpg, image/gif"
         />
 
         <StyledFieldSet>

@@ -8,11 +8,21 @@ export default function CreatePage({ onAddRecipe, recipes }) {
   const [inputValidation, setInputValidation] = useState("");
   const router = useRouter();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
+
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const cloudinaryImgURL = await response.json();
+
     const newRecipeData = Object.fromEntries(formData);
-    const preparedNewRecipeData = prepareFormData(newRecipeData);
+
+    const preparedNewRecipeData = await prepareFormData(newRecipeData);
+    preparedNewRecipeData.imageURL = cloudinaryImgURL;
 
     if (recipes.find((recipe) => recipe.name === preparedNewRecipeData.name)) {
       const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;
