@@ -102,6 +102,7 @@ const StyledActionElementsContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 1rem;
+  margin-bottom: 4.5rem;
 `;
 
 const StyledTrashBin = styled(TrashBin)`
