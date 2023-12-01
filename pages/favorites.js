@@ -20,13 +20,26 @@ export default function favoritesPage({
           onSearchFavorite={onSearchFavorite}
         />
       ) : (
-        <StyledNote>No favorite recipes yet</StyledNote>
+        <StyledNoteContainer>
+          <StyledCard>
+            <p>No favorite recipes yet</p>
+          </StyledCard>
+        </StyledNoteContainer>
       )}
     </>
   );
 }
 
-const StyledNote = styled.p`
-  margin-top: 50%;
-  text-align: center;
+const StyledCard = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25rem;
+  width: 25rem;
+`;
+
+const StyledNoteContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
