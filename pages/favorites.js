@@ -1,7 +1,7 @@
 import RecipeList from "@/components/RecipeList";
 import styled from "styled-components";
 
-export default function favoritesPage({
+export default function FavoritesPage({
   recipes,
   onAddFavorite,
   onSearchFavorite,
@@ -21,25 +21,21 @@ export default function favoritesPage({
         />
       ) : (
         <StyledNoteContainer>
-          <StyledCard>
-            <p>No favorite recipes yet</p>
-          </StyledCard>
+          <p>No favorite recipes yet</p>
         </StyledNoteContainer>
       )}
     </>
   );
 }
 
-const StyledCard = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 25rem;
-  width: 25rem;
-`;
-
 const StyledNoteContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  height: 75vh;
+
+  p {
+    text-align: center;
+    font-size: 1.5rem;
+  }
 `;

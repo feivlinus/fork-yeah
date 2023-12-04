@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NavigationIcons from "./Icons/NavigationIcons";
+import NavigationIcon from "./Icons/NavigationIcon";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -12,20 +12,22 @@ export default function Navigation() {
         <ul>
           <li>
             <StyledNavigationLink href="/">
-              <NavigationIcons variant={"home"} color={"#BABABA"} size={32} />
+              <NavigationIcon variant={"home"} isSelected={pathName === "/"} />
             </StyledNavigationLink>
           </li>
           <li>
             <StyledNavigationLink href="/recipe/create">
-              <NavigationIcons variant={"create"} color={"#BABABA"} size={32} />
+              <NavigationIcon
+                variant={"create"}
+                isSelected={pathName === "/recipe/create"}
+              />
             </StyledNavigationLink>
           </li>
           <li>
             <StyledNavigationLink href="/favorites">
-              <NavigationIcons
+              <NavigationIcon
                 variant={"favorites"}
-                color={pathName === "/favorites" ? "#FF3B3B" : "#BABABA"}
-                size={32}
+                isSelected={pathName === "/favorites"}
               />
             </StyledNavigationLink>
           </li>
