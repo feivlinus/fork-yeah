@@ -1,27 +1,36 @@
 import styled from "styled-components";
-import NavigationIcons from "./Icons/NavigationIcons";
+import NavigationIcon from "./Icons/NavigationIcon";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Navigation() {
+  const router = useRouter();
+  const pathName = router.pathname;
   return (
     <StyledFooterContainer>
       <nav>
         <ul>
           <li>
             <StyledNavigationLink href="/">
-              <NavigationIcons variant={"home"} color={"#BABABA"} size={32} />
+              <NavigationIcon variant={"home"} isSelected={pathName === "/"} />
             </StyledNavigationLink>
           </li>
           <li>
             <StyledNavigationLink href="/recipe/create">
-              <NavigationIcons variant={"create"} color={"#BABABA"} size={32} />
+              <NavigationIcon
+                variant={"create"}
+                isSelected={pathName === "/recipe/create"}
+              />
             </StyledNavigationLink>
           </li>
-
-          {/* THIS LINE OF CODE IS COMMENTED OUT,IT WILL COME IN THE NEXT USER STORY WHEN WE DIRECT THE USER TO THE FAVORITES PAGE */}
-          {/* <Link href="/">
-        <NavigationIcons variant={"favorites"} color={"#BABABA"} size={32} />
-      </Link> */}
+          <li>
+            <StyledNavigationLink href="/favorites">
+              <NavigationIcon
+                variant={"favorites"}
+                isSelected={pathName === "/favorites"}
+              />
+            </StyledNavigationLink>
+          </li>
         </ul>
       </nav>
     </StyledFooterContainer>
@@ -50,10 +59,10 @@ const StyledFooterContainer = styled.footer`
 `;
 
 const StyledNavigationLink = styled(Link)`
-  &:hover,
   &:active {
     svg {
       fill: #6e6e6e;
     }
   }
+  -webkit-tap-highlight-color: transparent;
 `;
