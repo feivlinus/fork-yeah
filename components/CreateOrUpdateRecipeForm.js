@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import Link from "next/link";
+import Image from "next/image";
+import TrashBin from "public/svg/TrashBin.svg";
+import { useEffect, useState } from "react";
 
 export default function CreateOrUpdateRecipeForm({
   errorMessage,
@@ -11,7 +14,10 @@ export default function CreateOrUpdateRecipeForm({
   const formTitle = isCreateNewRecipe ? "Create new recipe" : "Update Recipe";
   const formButtonTitle = isCreateNewRecipe ? "Add Recipe" : "Save Changes";
   const abortLinkUrl = isCreateNewRecipe ? "/" : `/recipe/${recipeDetails.id}`;
-
+  const [hasImage, setHasImage] = useState(
+    recipeDetails.imageURL ? true : false
+  );
+  useEffect(() => {}, [hasImage]);
   return (
     <>
       <h1>{formTitle}</h1>
@@ -43,15 +49,26 @@ export default function CreateOrUpdateRecipeForm({
           defaultValue={recipeDetails.preparationTime}
         />
 
-        <label htmlFor="imgurl">Image Url</label>
-
+        <label htmlFor="file">Image</label>
+        {/* {hasImage ? ( */}
+        {/* <> */}
+        <Image
+          src={recipeDetails.imageURL}
+          alt={recipeDetails.name}
+          width={300}
+          height={300}
+        />
+        <TrashBin onClick={() => setHasImage(false)} />
+        {/* </> */}
+        {/* ) : ( */}
         <input
           type="file"
           id="file"
           name="file"
           accept="image/jpeg, image/png, image/jpg, image/gif"
+          onChange={() => setHasImage(true)}
         />
-
+        {/* )} */}
         <StyledFieldSet>
           <legend>Ingredients:</legend>
           <input
