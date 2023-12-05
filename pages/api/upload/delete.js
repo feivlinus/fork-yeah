@@ -1,4 +1,3 @@
-import formidable from "formidable";
 import cloudinary from "cloudinary";
 
 cloudinary.config({
@@ -18,16 +17,10 @@ export default async function handler(request, response) {
     response.status(400).json({ message: "Method not allowed" });
     return;
   }
-  const form = request.body;
+  const imageIdToDelete = request.body;
   console.log(request.body);
 
-  // const file = files.file[0];
-  // const { newFilename, filepath } = file;
-
-  // now we have the information about the image, we can send it to cloudinary
-
-  // const result = await cloudinary.v2.uploader.destroy();
-
+  const result = await cloudinary.v2.uploader.destroy(imageIdToDelete);
   // response.status(200).json(result.secure_url);
-  response.status(200).json();
+  response.status(200).json(result);
 }

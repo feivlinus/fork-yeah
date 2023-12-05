@@ -2,22 +2,47 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 import TrashBin from "public/svg/TrashBin.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CreateOrUpdateRecipeForm({
   errorMessage,
   inputValidation,
   recipeDetails = {},
   onSubmit,
+  onHandleDelete,
+  image,
 }) {
   const isCreateNewRecipe = Object.keys(recipeDetails).length === 0;
   const formTitle = isCreateNewRecipe ? "Create new recipe" : "Update Recipe";
   const formButtonTitle = isCreateNewRecipe ? "Add Recipe" : "Save Changes";
   const abortLinkUrl = isCreateNewRecipe ? "/" : `/recipe/${recipeDetails.id}`;
+
   const [hasImage, setHasImage] = useState(
     recipeDetails.imageURL ? true : false
   );
-  useEffect(() => {}, [hasImage]);
+  const [imagePreviewSrc, setImagePreviewSrc] = useState({ src: "" });
+  const inputFile = useRef(null);
+
+  function handleImageDelete(event) {
+    event.preventDefault();
+    setHasImage(false);
+    setImagePreviewSrc({ src: "" });
+    onHandleDelete();
+
+    if (inputFile.current) {
+      inputFile.current.value = "";
+      inputFile.current.type = "text";
+      inputFile.current.type = "file";
+    }
+  }
+
+  function handleImageChange(event) {
+    setHasImage(true);
+    if (event.target.files && event.target.files[0]) {
+      setImagePreviewSrc({ src: URL.createObjectURL(event.target.files[0]) });
+    }
+  }
+
   return (
     <>
       <h1>{formTitle}</h1>
@@ -40,7 +65,6 @@ export default function CreateOrUpdateRecipeForm({
           $titleInput={inputValidation}
           defaultValue={recipeDetails.name}
         />
-
         <label htmlFor="duration">Cooking duration:</label>
         <input
           type="text"
@@ -48,27 +72,30 @@ export default function CreateOrUpdateRecipeForm({
           name="duration"
           defaultValue={recipeDetails.preparationTime}
         />
-
         <label htmlFor="file">Image</label>
-        {/* {hasImage ? ( */}
-        {/* <> */}
-        <Image
-          src={recipeDetails.imageURL}
-          alt={recipeDetails.name}
-          width={300}
-          height={300}
-        />
-        <TrashBin onClick={() => setHasImage(false)} />
-        {/* </> */}
-        {/* ) : ( */}
+        {hasImage ?? imagePreviewSrc ? (
+          <StyledImageContainer>
+            <div>
+              <StyledImage
+                src={imagePreviewSrc.src || recipeDetails.imageURL}
+                alt={recipeDetails.name || "new Image"}
+                width={300}
+                height={300}
+              />
+              <StyledTrasBin onClick={handleImageDelete} />
+            </div>
+          </StyledImageContainer>
+        ) : null}
         <input
           type="file"
           id="file"
           name="file"
           accept="image/jpeg, image/png, image/jpg, image/gif"
-          onChange={() => setHasImage(true)}
+          ref={inputFile}
+          onChange={handleImageChange}
+          style={{ display: hasImage ? "none" : "block" }}
         />
-        {/* )} */}
+
         <StyledFieldSet>
           <legend>Ingredients:</legend>
           <input
@@ -156,14 +183,12 @@ export default function CreateOrUpdateRecipeForm({
             }
           />
         </StyledFieldSet>
-
         <label htmlFor="description">Description:</label>
         <textarea
           name="description"
           rows="5"
           defaultValue={recipeDetails.description}
         />
-
         <button type="submit">{formButtonTitle}</button>
       </StyledForm>
       <StyledLinkContainer>
@@ -240,4 +265,32 @@ const StyledLink = styled(Link)`
   border-style: outset;
   border-color: buttonborder;
   border-image: initial;
+`;
+
+const StyledImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  div {
+    max-width: 100%;
+    height: auto;
+    position: relative;
+  }
+`;
+
+const StyledImage = styled(Image)`
+  max-width: 100%;
+  height: auto;
+`;
+
+const StyledTrasBin = styled(TrashBin)`
+  width: 3rem;
+  height: 3rem;
+  fill: black;
+  position: absolute;
+  top: 2.5%;
+  right: 2.5%;
+  z-index: 50;
+  background-color: white;
+  border-radius: 2rem;
+  border: solid black 0.25rem;
 `;

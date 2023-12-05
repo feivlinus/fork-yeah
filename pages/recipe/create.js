@@ -12,17 +12,18 @@ export default function CreatePage({ onAddRecipe, recipes }) {
     event.preventDefault();
     const formData = new FormData(event.target);
 
-    const response = await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    });
-
-    const cloudinaryImgURL = await response.json();
-
     const newRecipeData = Object.fromEntries(formData);
-
     const preparedNewRecipeData = await prepareFormData(newRecipeData);
-    preparedNewRecipeData.imageURL = cloudinaryImgURL;
+    if (formData.get("file").size > 0) {
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const cloudinaryImgURL = await response.json();
+      preparedNewRecipeData.imageURL = cloudinaryImgURL;
+    }
+
+    //preparedNewRecipeData.publicImageId
 
     if (recipes.find((recipe) => recipe.name === preparedNewRecipeData.name)) {
       const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;

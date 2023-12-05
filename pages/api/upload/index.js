@@ -32,5 +32,5 @@ export default async function handler(request, response) {
     folder: "recipe-images",
   });
 
-  response.status(200).json(result.secure_url);
+  response.status(200).json(result.secure_url, result.public_id);
 }
