@@ -15,7 +15,7 @@ export const config = {
 
 export default async function handler(request, response) {
   if (request.method !== "POST") {
-    response.status(400).json({ message: "Method not allowed" });
+    response.status(400).json({ message: "Method Not Allowed" });
     return;
   }
   const form = formidable({});
