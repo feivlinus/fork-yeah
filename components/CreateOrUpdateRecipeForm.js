@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import styled from "styled-components";
 import TrashBin from "public/svg/TrashBin.svg";
-import { useEffect, useRef, useState } from "react";
 
 export default function CreateOrUpdateRecipeForm({
   errorMessage,
@@ -27,7 +27,9 @@ export default function CreateOrUpdateRecipeForm({
     event.preventDefault();
     setHasImage(false);
     setImagePreviewSrc({ src: "" });
-    onHandleDelete();
+    if (hasImage) {
+      onHandleDelete();
+    }
 
     if (inputFile.current) {
       inputFile.current.value = "";

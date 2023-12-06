@@ -18,9 +18,7 @@ export default async function handler(request, response) {
     return;
   }
   const imageIdToDelete = request.body;
-  console.log(request.body);
-
   const result = await cloudinary.v2.uploader.destroy(imageIdToDelete);
-  // response.status(200).json(result.secure_url);
+
   response.status(200).json(result);
 }

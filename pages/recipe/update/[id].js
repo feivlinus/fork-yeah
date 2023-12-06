@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
 import { prepareFormData } from "@/utils/utils";
+import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
 
 export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
   const [error, setError] = useState("");
@@ -24,30 +24,35 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
   async function handleUpdateSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    //Image upload fetch if new image is in form
+
     let response = "";
+    //Image upload fetch if new image is in form
     if (formData.get("file").size > 0) {
       response = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
-    } else {
-      //image got deleted?
-      if (recipeDetails.imageURL && toDelete) {
-        console.log("lösche das alte");
-        response = await fetch("/api/upload/delete", {
-          method: "POST",
-          body: recipeDetails.imageURL,
-        });
-      }
+    }
+    //Delete old image from cloudinary when image got removed and no file was selected
+    else if (
+      formData.get("file").size === 0 &&
+      recipeDetails.imageId &&
+      toDelete
+    ) {
+      response = await fetch("/api/upload/delete", {
+        method: "POST",
+        body: recipeDetails.imageId,
+      });
     }
 
     const newRecipeData = Object.fromEntries(formData);
     const preparedNewRecipeData = await prepareFormData(newRecipeData, id);
 
-    if (response) {
+    //When there is a file upload
+    if (response !== "") {
       const cloudinaryImgURL = await response.json();
-      preparedNewRecipeData.imageURL = cloudinaryImgURL;
+      preparedNewRecipeData.imageURL = cloudinaryImgURL.url;
+      preparedNewRecipeData.imageId = cloudinaryImgURL.imageId;
     }
 
     setInputValidation("valid");
@@ -62,7 +67,6 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
         onSubmit={handleUpdateSubmit}
         errorMessage={error}
         inputValidation={inputValidation}
-        image={image}
         onHandleDelete={handleToDelete}
       />
     );
