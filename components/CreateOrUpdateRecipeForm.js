@@ -75,7 +75,7 @@ export default function CreateOrUpdateRecipeForm({
           defaultValue={recipeDetails.preparationTime}
         />
         <label htmlFor="file">Image</label>
-        {hasImage ?? imagePreviewSrc ? (
+        {(hasImage || imagePreviewSrc.src) && (
           <StyledImageContainer>
             <div>
               <StyledImage
@@ -87,7 +87,7 @@ export default function CreateOrUpdateRecipeForm({
               <StyledTrasBin onClick={handleImageDelete} />
             </div>
           </StyledImageContainer>
-        ) : null}
+        )}
         <input
           type="file"
           id="file"

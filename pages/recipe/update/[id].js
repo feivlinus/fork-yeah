@@ -13,7 +13,7 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
 
   const recipeDetails = recipes.find((recipe) => recipe.id === id);
 
-  if (recipeDetails?.imageURL && (image === null || undefined)) {
+  if (recipeDetails?.imageURL && (image === null || image === undefined)) {
     setImage({ id: recipeDetails.imageURL, toDelete: false });
   }
 
@@ -23,7 +23,20 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
 
   async function handleUpdateSubmit(event) {
     event.preventDefault();
+
     const formData = new FormData(event.target);
+    const newRecipeData = Object.fromEntries(formData);
+    const preparedNewRecipeData = prepareFormData(newRecipeData, id);
+
+    if (
+      preparedNewRecipeData.name !== recipeDetails.name &&
+      recipes.find((recipe) => recipe.name === preparedNewRecipeData.name)
+    ) {
+      const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;
+      setError(errorString);
+      setInputValidation("already-created");
+      return;
+    }
 
     let response = "";
     //Image upload fetch if new image is in form
@@ -45,11 +58,8 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
       });
     }
 
-    const newRecipeData = Object.fromEntries(formData);
-    const preparedNewRecipeData = await prepareFormData(newRecipeData, id);
-
     //When there is a file upload
-    if (response !== "") {
+    if (response) {
       const cloudinaryImgURL = await response.json();
       preparedNewRecipeData.imageURL = cloudinaryImgURL.url;
       preparedNewRecipeData.imageId = cloudinaryImgURL.imageId;
