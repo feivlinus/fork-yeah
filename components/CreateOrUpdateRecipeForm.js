@@ -170,6 +170,11 @@ const StyledForm = styled.form`
   grid-template-columns: repeat(auto-fill, 75vw);
   justify-content: center;
   gap: 2vh 2vw;
+  color: var(--dark);
+  input,
+  ::placeholder {
+    color: var(--dark);
+  }
 `;
 
 const StyledTitleInput = styled.input`

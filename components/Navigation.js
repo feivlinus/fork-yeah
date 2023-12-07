@@ -43,7 +43,7 @@ const StyledFooterContainer = styled.footer`
   padding: 0.75rem;
   justify-content: center;
   flex-shrink: 0;
-  background: #fff;
+  background: var(--primary);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25) inset;
   bottom: 0;
   position: fixed;
@@ -59,10 +59,5 @@ const StyledFooterContainer = styled.footer`
 `;
 
 const StyledNavigationLink = styled(Link)`
-  &:active {
-    svg {
-      fill: #6e6e6e;
-    }
-  }
   -webkit-tap-highlight-color: transparent;
 `;

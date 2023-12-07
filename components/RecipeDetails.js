@@ -44,16 +44,21 @@ export default function RecipeDetails({
           />
         </StyledButtonContainer>
         <p>⏰ {recipeDetails.preparationTime}</p>
-        <ul>
-          {recipeDetails.ingredients.map(
-            (ingredient) =>
-              ingredient.name && (
-                <li key={uuidv4()}>
-                  {ingredient.quantity} - {ingredient.name}
-                </li>
-              )
-          )}
-        </ul>
+
+        <StyledIngredientTable>
+          <tbody>
+            {recipeDetails.ingredients.map(
+              (ingredient) =>
+                ingredient.name && (
+                  <tr key={uuidv4()}>
+                    <td className="text-right">{ingredient.quantity}</td>
+                    <td className="text-left">{ingredient.name}</td>
+                  </tr>
+                )
+            )}
+          </tbody>
+        </StyledIngredientTable>
+
         <StyledDescription>{recipeDetails.description}</StyledDescription>
       </RecipeCard>
       <StyledActionElementsContainer>
@@ -76,10 +81,33 @@ const RecipeCard = styled.article`
   flex-direction: column;
   align-items: center;
   position: relative;
+  color: var(--dark);
 `;
 
 const StyledImage = styled(Image)`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+`;
+
+const StyledIngredientTable = styled.table`
+  padding: 5%;
+  .text-left {
+    text-align: left;
+  }
+  .text-right {
+    text-align: right;
+  }
+
+  td {
+    box-sizing: border-box;
+    min-height: 48px;
+    padding: 4px 8px;
+    vertical-align: top;
+  }
+
+  tbody {
+    display: table-row-group;
+    vertical-align: middle;
+  }
 `;
 
 const StyledDescription = styled.p`
