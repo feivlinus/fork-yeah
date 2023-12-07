@@ -28,7 +28,7 @@ export default function CreateOrUpdateRecipeForm({
     setHasImage(false);
     setImagePreviewSrc({ src: "" });
     if (hasImage) {
-      onHandleDelete();
+      onHandleDelete;
     }
 
     if (inputFile.current) {
