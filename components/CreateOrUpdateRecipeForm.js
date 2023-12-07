@@ -1,16 +1,49 @@
-import styled from "styled-components";
+import { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import styled from "styled-components";
+import TrashBin from "public/svg/TrashBin.svg";
 
 export default function CreateOrUpdateRecipeForm({
   errorMessage,
   inputValidation,
   recipeDetails = {},
   onSubmit,
+  onHandleDelete,
+  image,
 }) {
   const isCreateNewRecipe = Object.keys(recipeDetails).length === 0;
   const formTitle = isCreateNewRecipe ? "Create new recipe" : "Update Recipe";
   const formButtonTitle = isCreateNewRecipe ? "Add Recipe" : "Save Changes";
   const abortLinkUrl = isCreateNewRecipe ? "/" : `/recipe/${recipeDetails.id}`;
+
+  const [hasImage, setHasImage] = useState(
+    recipeDetails.imageURL ? true : false
+  );
+  const [imagePreviewSrc, setImagePreviewSrc] = useState({ src: "" });
+  const inputFile = useRef(null);
+
+  function handleImageDelete(event) {
+    event.preventDefault();
+    setHasImage(false);
+    setImagePreviewSrc({ src: "" });
+    if (hasImage) {
+      onHandleDelete;
+    }
+
+    if (inputFile.current) {
+      inputFile.current.value = "";
+      inputFile.current.type = "text";
+      inputFile.current.type = "file";
+    }
+  }
+
+  function handleImageChange(event) {
+    setHasImage(true);
+    if (event.target.files && event.target.files[0]) {
+      setImagePreviewSrc({ src: URL.createObjectURL(event.target.files[0]) });
+    }
+  }
 
   return (
     <>
@@ -43,13 +76,28 @@ export default function CreateOrUpdateRecipeForm({
             defaultValue={recipeDetails.preparationTime}
           />
 
-          <label htmlFor="imgurl">Image Url</label>
-
+          <label htmlFor="file">Image</label>
+          {(hasImage || imagePreviewSrc.src) && (
+            <StyledImageContainer>
+              <div>
+                <StyledImage
+                  src={imagePreviewSrc.src || recipeDetails.imageURL}
+                  alt={recipeDetails.name || "new Image"}
+                  width={300}
+                  height={300}
+                />
+                <StyledTrasBin onClick={handleImageDelete} />
+              </div>
+            </StyledImageContainer>
+          )}
           <input
-            type="url"
-            id="imgurl"
-            name="imgurl"
-            defaultValue={recipeDetails.imageURL}
+            type="file"
+            id="file"
+            name="file"
+            accept="image/jpeg, image/png, image/jpg, image/gif"
+            ref={inputFile}
+            onChange={handleImageChange}
+            style={{ display: hasImage ? "none" : "block" }}
           />
 
           <StyledFieldSet>
@@ -100,7 +148,6 @@ export default function CreateOrUpdateRecipeForm({
                   : ""
               }
             />
-
             <input
               type="text"
               name="amount3"
@@ -123,7 +170,6 @@ export default function CreateOrUpdateRecipeForm({
                   : ""
               }
             />
-
             <input
               type="text"
               name="amount4"
@@ -157,6 +203,7 @@ export default function CreateOrUpdateRecipeForm({
 
           <button type="submit">{formButtonTitle}</button>
         </StyledForm>
+
         <StyledLinkContainer>
           <StyledLink href={abortLinkUrl}>Cancel</StyledLink>
         </StyledLinkContainer>
@@ -232,4 +279,32 @@ const StyledLink = styled(Link)`
   border-style: outset;
   border-color: buttonborder;
   border-image: initial;
+`;
+
+const StyledImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  div {
+    max-width: 100%;
+    height: auto;
+    position: relative;
+  }
+`;
+
+const StyledImage = styled(Image)`
+  max-width: 100%;
+  height: auto;
+`;
+
+const StyledTrasBin = styled(TrashBin)`
+  width: 3rem;
+  height: 3rem;
+  fill: black;
+  position: absolute;
+  top: 2.5%;
+  right: 2.5%;
+  z-index: 50;
+  background-color: white;
+  border-radius: 2rem;
+  border: solid black 0.25rem;
 `;

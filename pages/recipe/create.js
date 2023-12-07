@@ -1,15 +1,16 @@
-import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
-import { useState } from "react";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { prepareFormData } from "@/utils/utils";
+import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
 
 export default function CreatePage({ onAddRecipe, recipes }) {
   const [error, setError] = useState("");
   const [inputValidation, setInputValidation] = useState("");
   const router = useRouter();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+
     const formData = new FormData(event.target);
     const newRecipeData = Object.fromEntries(formData);
     const preparedNewRecipeData = prepareFormData(newRecipeData);
@@ -21,6 +22,16 @@ export default function CreatePage({ onAddRecipe, recipes }) {
       return;
     } else {
       setInputValidation("valid");
+    }
+
+    if (formData.get("file").size > 0) {
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const cloudinaryImgURL = await response.json();
+      preparedNewRecipeData.imageURL = cloudinaryImgURL.url;
+      preparedNewRecipeData.imageId = cloudinaryImgURL.id;
     }
 
     onAddRecipe(preparedNewRecipeData);

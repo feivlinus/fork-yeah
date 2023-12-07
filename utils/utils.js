@@ -12,7 +12,7 @@ export function prepareFormData(formData, id) {
     id: id ?? uuidv4(),
     name: formData.title,
     preparationTime: formData.duration,
-    imageURL: formData.imgurl,
+
     description: formData.description,
     ingredients: [
       { quantity: formData.amount1, name: formData.ingredient1 },
