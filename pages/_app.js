@@ -1,6 +1,7 @@
 import GlobalStyle from "../styles";
 import useLocalStorageState from "use-local-storage-state";
 import data from "@/db/data";
+import Navigation from "@/components/Navigation";
 
 export default function App({ Component, pageProps }) {
   const [recipes, setRecipes] = useLocalStorageState("recipes", {
@@ -51,6 +52,7 @@ export default function App({ Component, pageProps }) {
         onAddFavorite={handleAddFavorite}
         onSearchFavorite={handleSearchFavorite}
       />
+      <Navigation />
     </>
   );
 }

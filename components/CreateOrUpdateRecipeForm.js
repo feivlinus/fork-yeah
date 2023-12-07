@@ -54,148 +54,160 @@ export default function CreateOrUpdateRecipeForm({
           <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
         </StyledErrorMessageContainer>
       )}
-
-      <StyledForm onSubmit={onSubmit}>
-        <label htmlFor="title">Title:</label>
-        <StyledTitleInput
-          type="text"
-          id="title"
-          name="title"
-          required
-          maxLength={75}
-          autoFocus
-          $titleInput={inputValidation}
-          defaultValue={recipeDetails.name}
-        />
-        <label htmlFor="duration">Cooking duration:</label>
-        <input
-          type="text"
-          id="duration"
-          name="duration"
-          defaultValue={recipeDetails.preparationTime}
-        />
-        <label htmlFor="file">Image</label>
-        {(hasImage || imagePreviewSrc.src) && (
-          <StyledImageContainer>
-            <div>
-              <StyledImage
-                src={imagePreviewSrc.src || recipeDetails.imageURL}
-                alt={recipeDetails.name || "new Image"}
-                width={300}
-                height={300}
-              />
-              <StyledTrasBin onClick={handleImageDelete} />
-            </div>
-          </StyledImageContainer>
-        )}
-        <input
-          type="file"
-          id="file"
-          name="file"
-          accept="image/jpeg, image/png, image/jpg, image/gif"
-          ref={inputFile}
-          onChange={handleImageChange}
-          style={{ display: hasImage ? "none" : "block" }}
-        />
-
-        <StyledFieldSet>
-          <legend>Ingredients:</legend>
-          <input
+      <main>
+        <StyledForm onSubmit={onSubmit}>
+          <label htmlFor="title">Title:</label>
+          <StyledTitleInput
             type="text"
-            name="amount1"
-            placeholder="Amount"
+            id="title"
+            name="title"
             required
-            defaultValue={
-              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
-                ? recipeDetails.ingredients[0].quantity
-                : ""
-            }
-          />
-          <input
-            type="text"
-            name="ingredient1"
-            placeholder="Ingredient"
-            required
-            defaultValue={
-              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
-                ? recipeDetails.ingredients[0].name
-                : ""
-            }
-          />
-          <input
-            type="text"
-            name="amount2"
-            placeholder="Amount"
-            defaultValue={
-              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
-                ? recipeDetails.ingredients[1].quantity
-                : ""
-            }
-          />
-          <input
-            type="text"
-            name="ingredient2"
-            placeholder="Ingredient"
-            defaultValue={
-              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
-                ? recipeDetails.ingredients[1].name
-                : ""
-            }
+            maxLength={75}
+            autoFocus
+            $titleInput={inputValidation}
+            defaultValue={recipeDetails.name}
           />
 
+          <label htmlFor="duration">Cooking duration:</label>
           <input
             type="text"
-            name="amount3"
-            placeholder="Amount"
-            defaultValue={
-              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
-                ? recipeDetails.ingredients[2].quantity
-                : ""
-            }
-          />
-          <input
-            type="text"
-            name="ingredient3"
-            placeholder="Ingredient"
-            defaultValue={
-              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
-                ? recipeDetails.ingredients[2].name
-                : ""
-            }
+            id="duration"
+            name="duration"
+            defaultValue={recipeDetails.preparationTime}
           />
 
+          <label htmlFor="file">Image</label>
+          {(hasImage || imagePreviewSrc.src) && (
+            <StyledImageContainer>
+              <div>
+                <StyledImage
+                  src={imagePreviewSrc.src || recipeDetails.imageURL}
+                  alt={recipeDetails.name || "new Image"}
+                  width={300}
+                  height={300}
+                />
+                <StyledTrasBin onClick={handleImageDelete} />
+              </div>
+            </StyledImageContainer>
+          )}
           <input
-            type="text"
-            name="amount4"
-            placeholder="Amount"
-            defaultValue={
-              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
-                ? recipeDetails.ingredients[3].quantity
-                : ""
-            }
+            type="file"
+            id="file"
+            name="file"
+            accept="image/jpeg, image/png, image/jpg, image/gif"
+            ref={inputFile}
+            onChange={handleImageChange}
+            style={{ display: hasImage ? "none" : "block" }}
           />
-          <input
-            type="text"
-            name="ingredient4"
-            placeholder="Ingredient"
-            defaultValue={
-              recipeDetails.ingredients && recipeDetails.ingredients.length > 0
-                ? recipeDetails.ingredients[3].name
-                : ""
-            }
+
+          <StyledFieldSet>
+            <legend>Ingredients:</legend>
+            <input
+              type="text"
+              name="amount1"
+              placeholder="Amount"
+              required
+              defaultValue={
+                recipeDetails.ingredients &&
+                recipeDetails.ingredients.length > 0
+                  ? recipeDetails.ingredients[0].quantity
+                  : ""
+              }
+            />
+            <input
+              type="text"
+              name="ingredient1"
+              placeholder="Ingredient"
+              required
+              defaultValue={
+                recipeDetails.ingredients &&
+                recipeDetails.ingredients.length > 0
+                  ? recipeDetails.ingredients[0].name
+                  : ""
+              }
+            />
+            <input
+              type="text"
+              name="amount2"
+              placeholder="Amount"
+              defaultValue={
+                recipeDetails.ingredients &&
+                recipeDetails.ingredients.length > 0
+                  ? recipeDetails.ingredients[1].quantity
+                  : ""
+              }
+            />
+            <input
+              type="text"
+              name="ingredient2"
+              placeholder="Ingredient"
+              defaultValue={
+                recipeDetails.ingredients &&
+                recipeDetails.ingredients.length > 0
+                  ? recipeDetails.ingredients[1].name
+                  : ""
+              }
+            />
+            <input
+              type="text"
+              name="amount3"
+              placeholder="Amount"
+              defaultValue={
+                recipeDetails.ingredients &&
+                recipeDetails.ingredients.length > 0
+                  ? recipeDetails.ingredients[2].quantity
+                  : ""
+              }
+            />
+            <input
+              type="text"
+              name="ingredient3"
+              placeholder="Ingredient"
+              defaultValue={
+                recipeDetails.ingredients &&
+                recipeDetails.ingredients.length > 0
+                  ? recipeDetails.ingredients[2].name
+                  : ""
+              }
+            />
+            <input
+              type="text"
+              name="amount4"
+              placeholder="Amount"
+              defaultValue={
+                recipeDetails.ingredients &&
+                recipeDetails.ingredients.length > 0
+                  ? recipeDetails.ingredients[3].quantity
+                  : ""
+              }
+            />
+            <input
+              type="text"
+              name="ingredient4"
+              placeholder="Ingredient"
+              defaultValue={
+                recipeDetails.ingredients &&
+                recipeDetails.ingredients.length > 0
+                  ? recipeDetails.ingredients[3].name
+                  : ""
+              }
+            />
+          </StyledFieldSet>
+
+          <label htmlFor="description">Description:</label>
+          <textarea
+            name="description"
+            rows="5"
+            defaultValue={recipeDetails.description}
           />
-        </StyledFieldSet>
-        <label htmlFor="description">Description:</label>
-        <textarea
-          name="description"
-          rows="5"
-          defaultValue={recipeDetails.description}
-        />
-        <button type="submit">{formButtonTitle}</button>
-      </StyledForm>
-      <StyledLinkContainer>
-        <StyledLink href={abortLinkUrl}>Cancel</StyledLink>
-      </StyledLinkContainer>
+
+          <button type="submit">{formButtonTitle}</button>
+        </StyledForm>
+
+        <StyledLinkContainer>
+          <StyledLink href={abortLinkUrl}>Cancel</StyledLink>
+        </StyledLinkContainer>
+      </main>
     </>
   );
 }

@@ -38,11 +38,6 @@ export default function RecipeList({
           </StyledListItem>
         ))}
       </RecipeStyledUl>
-      <StyledLinkCardContainer>
-        <StyledLinkCard>
-          <StyledLink href={"/recipe/create"}>✚</StyledLink>
-        </StyledLinkCard>
-      </StyledLinkCardContainer>
     </>
   );
 }
@@ -85,24 +80,4 @@ const RecipeStyledUl = styled.ul`
   justify-content: center;
   gap: 2.5vh 5vw;
   margin-bottom: 5%;
-`;
-
-const StyledLinkCardContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const StyledLinkCard = styled.div`
-  height: 150px;
-  width: 150px;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: #000;
-  font-size: 3rem;
 `;
