@@ -11,7 +11,8 @@ export default createGlobalStyle`
     --primary: #a32e2d;
     
     --secondary: #fdead8;
-    --secondary-darker: color-mix(in srgb,var(--secondary),#000 15%);
+    /* --secondary-darker: color-mix(in srgb,var(--secondary),#000 25%); */
+    --secondary-darker: rgba(255, 220, 186, 1);
     
     --secondary-variant: #332f2b;
 

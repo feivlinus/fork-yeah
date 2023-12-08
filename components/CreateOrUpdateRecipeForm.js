@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
 
 export default function CreateOrUpdateRecipeForm({
   errorMessage,
@@ -13,25 +12,14 @@ export default function CreateOrUpdateRecipeForm({
   const formButtonTitle = isCreateNewRecipe ? "Add Recipe" : "Save Changes";
   const abortLinkUrl = isCreateNewRecipe ? "/" : `/recipe/${recipeDetails.id}`;
 
-  const errorMessageRef = useRef();
-  const titleInputRef = useRef();
-
-  useEffect(() => {
-    if (errorMessage !== "") {
-      errorMessageRef.current.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
-  }, [errorMessage]);
-
   return (
     <>
       <StyledTitle>{formTitle}</StyledTitle>
-      <StyledErrorMessageContainer ref={errorMessageRef}>
-        {errorMessage && (
-          <StyledErrorMessage autoFocus>{errorMessage}</StyledErrorMessage>
-        )}
-      </StyledErrorMessageContainer>
+
+      <StyledErrorMessage $isVisible={errorMessage.visible}>
+        {errorMessage.text}
+      </StyledErrorMessage>
+
       <StyledMainContainer>
         <StyledForm onSubmit={onSubmit}>
           <label htmlFor="title">Title:</label>
@@ -42,9 +30,8 @@ export default function CreateOrUpdateRecipeForm({
             required
             maxLength={75}
             autoFocus
-            $titleInput={inputValidation}
             defaultValue={recipeDetails.name}
-            ref={titleInputRef}
+            $isVisible={errorMessage.visible}
           />
 
           <label htmlFor="duration">Cooking duration:</label>
@@ -216,12 +203,8 @@ const StyledForm = styled.form`
 `;
 
 const StyledTitleInput = styled.input`
-  border: ${({ $titleInput }) =>
-    $titleInput === "already-created"
-      ? "2px solid red"
-      : $titleInput === "valid"
-      ? "2px solid green"
-      : ""};
+  border: ${({ $isVisible }) =>
+    $isVisible ? "2px solid red" : "2px solid green"};
 `;
 
 const StyledFieldSet = styled.fieldset`
@@ -234,20 +217,17 @@ const StyledFieldSet = styled.fieldset`
   }
 `;
 
-const StyledErrorMessageContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const StyledErrorMessage = styled.span`
   background-color: var(--primary);
   border-radius: 1rem;
-  margin: 5%;
+  margin: 1rem;
   padding: 1rem;
   color: var(--secondary);
-  width: 75vw;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  bottom: 75px;
+  right: ${({ $isVisible }) => ($isVisible ? "0px" : "-500px")};
+  transition: right 1s;
 `;
 
 const StyledLinkContainer = styled.div`

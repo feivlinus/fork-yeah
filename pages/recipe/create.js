@@ -4,12 +4,12 @@ import { useRouter } from "next/router";
 import { prepareFormData } from "@/utils/utils";
 
 export default function CreatePage({ onAddRecipe, recipes }) {
-  const [error, setError] = useState("");
+  const [error, setError] = useState({ visible: false, text: "" });
   const [inputValidation, setInputValidation] = useState("");
   const router = useRouter();
 
   function handleResetError() {
-    setError("");
+    setError({ ...error, visible: false });
   }
 
   function handleSubmit(event) {
@@ -20,7 +20,8 @@ export default function CreatePage({ onAddRecipe, recipes }) {
 
     if (recipes.find((recipe) => recipe.name === preparedNewRecipeData.name)) {
       const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;
-      setError(errorString);
+      setError({ visible: true, text: errorString });
+      setTimeout(handleResetError, 5000);
       setInputValidation("already-created");
       return;
     } else {
@@ -37,6 +38,7 @@ export default function CreatePage({ onAddRecipe, recipes }) {
         onSubmit={handleSubmit}
         errorMessage={error}
         inputValidation={inputValidation}
+        onResetError={handleResetError}
       />
     </>
   );

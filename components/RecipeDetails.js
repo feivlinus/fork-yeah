@@ -98,15 +98,28 @@ const StyledIngredientTable = styled.table`
     text-align: right;
   }
 
+  border-collapse: collapse;
+
   td {
     padding: 4px 8px;
-    border-radius: 0.5rem;
+    /* border-radius: 0.5rem; */
+  }
+
+  tr {
+    border: none;
   }
 
   tbody {
     display: table-row-group;
     vertical-align: middle;
   }
+  td:nth-child(even) {
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+  td:nth-child(odd) {
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+
   tbody tr:nth-child(odd) {
     background-color: var(--secondary-darker);
   }

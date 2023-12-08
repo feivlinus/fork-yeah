@@ -21,7 +21,7 @@ const StyledHeadContainer = styled.div`
   height: 4.5rem;
   width: 100%;
   background-color: var(--primary);
-  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.25) inset;
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 5px 0px;
 
   h1 {
     all: unset;
