@@ -50,8 +50,8 @@ export default function CreateOrUpdateRecipeForm({
   function handleAddIngredients() {
     setInputs([...inputs, { id: uuidv4 }]);
   }
-  function handleDeleteIngredients() {
-    setInputs(inputs.filter((input) => input.id !== id));
+  function handleDeleteIngredients(id) {
+    setInputs(inputs.filter((input) => input.uuidv4 !== id));
   }
   return (
     <>
@@ -110,39 +110,45 @@ export default function CreateOrUpdateRecipeForm({
           <button type="button" onClick={handleAddIngredients}>
             Add
           </button>
-          <StyledFieldSet>
-            <div>
-              {addIngredients > 1 &&
-                addIngredients.map((_, index) => (
-                  <input key={index} type="text" />
-                ))}
-            </div>
-            <legend>Ingredients:</legend>
-            <input
-              type="text"
-              name="amount1"
-              placeholder="Amount"
-              required
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[0].quantity
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="ingredient1"
-              placeholder="Ingredient"
-              required
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[0].name
-                  : ""
-              }
-            />
-          </StyledFieldSet>
+          <legend>Ingredients:</legend>
+          {inputs.map((input) => (
+            <>
+              <StyledFieldSet key={input.uuidv4}>
+                <input
+                  id={`amount-${input.id}`}
+                  type="text"
+                  name="amount1"
+                  placeholder="Amount"
+                  required
+                  defaultValue={
+                    recipeDetails.ingredients &&
+                    recipeDetails.ingredients.length > 0
+                      ? recipeDetails.ingredients[0].quantity
+                      : ""
+                  }
+                />
+                <input
+                  id={`ingredient-${input.id}`}
+                  type="text"
+                  name="ingredient1"
+                  placeholder="Ingredient"
+                  required
+                  defaultValue={
+                    recipeDetails.ingredients &&
+                    recipeDetails.ingredients.length > 0
+                      ? recipeDetails.ingredients[0].name
+                      : ""
+                  }
+                />
+                <button
+                  type="button"
+                  onClick={() => handleDeleteIngredients(input.uuidv4)}
+                >
+                  X
+                </button>
+              </StyledFieldSet>
+            </>
+          ))}
 
           <label htmlFor="description">Description:</label>
           <textarea
