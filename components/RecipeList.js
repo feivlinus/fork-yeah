@@ -20,9 +20,9 @@ export default function RecipeList({
                 isFavoriteFlag={onSearchFavorite(recipe.id)}
               />
             </StyledFavoriteButtonContainer>
-            <Link href={`/recipe/${recipe.id}`}>
+            <StyledLink href={`/recipe/${recipe.id}`}>
               <StyledFigure>
-                <Image
+                <StyledImage
                   src={
                     recipe.imageURL
                       ? recipe.imageURL
@@ -34,7 +34,7 @@ export default function RecipeList({
                 />
                 <StyledFigcaption>{recipe.name}</StyledFigcaption>
               </StyledFigure>
-            </Link>
+            </StyledLink>
           </StyledListItem>
         ))}
       </RecipeStyledUl>
@@ -44,6 +44,12 @@ export default function RecipeList({
 
 const StyledListItem = styled.li`
   position: relative;
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &:active {
+    transform: scale(1.1);
+  }
 `;
 
 const StyledFavoriteButtonContainer = styled.div`
@@ -53,6 +59,12 @@ const StyledFavoriteButtonContainer = styled.div`
   z-index: 20;
 `;
 
+const StyledImage = styled(Image)`
+  border-radius: 1rem;
+`;
+
+const StyledLink = styled(Link)``;
+
 const StyledFigure = styled.figure`
   position: relative;
   height: 150px;
@@ -60,10 +72,11 @@ const StyledFigure = styled.figure`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   z-index: -10;
   margin: 0;
+  border-radius: 1rem;
 `;
 
 const StyledFigcaption = styled.figcaption`
-  font-size: 0.8rem;
+  font-size: 1rem;
   position: absolute;
   left: 5%;
   bottom: 10%;
@@ -79,5 +92,6 @@ const RecipeStyledUl = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
   justify-content: center;
   gap: 2.5vh 5vw;
+  padding-top: 1rem;
   margin-bottom: 5%;
 `;

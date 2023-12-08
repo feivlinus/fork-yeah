@@ -44,7 +44,7 @@ const StyledFooterContainer = styled.footer`
   justify-content: center;
   flex-shrink: 0;
   background: var(--primary);
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25) inset;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.25) inset;
   bottom: 0;
   position: fixed;
   z-index: 50;

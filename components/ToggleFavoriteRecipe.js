@@ -23,7 +23,7 @@ export default function ToggleFavoriteRecipe({
       <StyledHeartCircle>
         <HeartIcon
           variant={isFavorite ? "favorite" : "noFavorite"}
-          color={"var(--light)"}
+          color={"var(--secondary)"}
           size={"1.25rem"}
         />
       </StyledHeartCircle>

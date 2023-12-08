@@ -17,7 +17,18 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
     const newRecipeData = Object.fromEntries(formData);
     const preparedNewRecipeData = prepareFormData(newRecipeData, id);
 
-    setInputValidation("valid");
+    if (
+      recipes.find((recipe) => recipe.name === preparedNewRecipeData.name) &&
+      recipeDetails.name !== preparedNewRecipeData.name
+    ) {
+      const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;
+      setError(errorString);
+      setInputValidation("already-created");
+      return;
+    } else {
+      setInputValidation("valid");
+    }
+
     onUpdateRecipe(preparedNewRecipeData, id);
     router.push(`/recipe/${id}`);
   }
