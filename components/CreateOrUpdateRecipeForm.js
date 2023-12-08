@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
 import TrashBin from "public/svg/TrashBin.svg";
+import Ingredient from "./Ingredient";
 
 export default function CreateOrUpdateRecipeForm({
   errorMessage,
@@ -44,7 +45,9 @@ export default function CreateOrUpdateRecipeForm({
       setImagePreviewSrc({ src: URL.createObjectURL(event.target.files[0]) });
     }
   }
-
+  function handleAddIngredients() {
+    console.log("hallo test");
+  }
   return (
     <>
       <h1>{formTitle}</h1>
@@ -99,7 +102,9 @@ export default function CreateOrUpdateRecipeForm({
             onChange={handleImageChange}
             style={{ display: hasImage ? "none" : "block" }}
           />
-
+          <button type="button" onClick={handleAddIngredients}>
+            Add
+          </button>
           <StyledFieldSet>
             <legend>Ingredients:</legend>
             <input
@@ -126,6 +131,9 @@ export default function CreateOrUpdateRecipeForm({
                   : ""
               }
             />
+            <Ingredient />
+          </StyledFieldSet>
+          {/* <StyledFieldSet>
             <input
               type="text"
               name="amount2"
@@ -192,7 +200,7 @@ export default function CreateOrUpdateRecipeForm({
                   : ""
               }
             />
-          </StyledFieldSet>
+          </StyledFieldSet> */}
 
           <label htmlFor="description">Description:</label>
           <textarea
