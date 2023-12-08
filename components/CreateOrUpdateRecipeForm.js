@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
 import TrashBin from "public/svg/TrashBin.svg";
-import Ingredient from "./Ingredient";
+import { v4 as uuidv4 } from "uuid";
 
 export default function CreateOrUpdateRecipeForm({
   errorMessage,
@@ -45,8 +45,13 @@ export default function CreateOrUpdateRecipeForm({
       setImagePreviewSrc({ src: URL.createObjectURL(event.target.files[0]) });
     }
   }
+  const [inputs, setInputs] = useState([{ id: 0 }]);
+
   function handleAddIngredients() {
-    console.log("hallo test");
+    setInputs([...inputs, { id: uuidv4 }]);
+  }
+  function handleDeleteIngredients() {
+    setInputs(inputs.filter((input) => input.id !== id));
   }
   return (
     <>
@@ -106,6 +111,12 @@ export default function CreateOrUpdateRecipeForm({
             Add
           </button>
           <StyledFieldSet>
+            <div>
+              {addIngredients > 1 &&
+                addIngredients.map((_, index) => (
+                  <input key={index} type="text" />
+                ))}
+            </div>
             <legend>Ingredients:</legend>
             <input
               type="text"
@@ -131,76 +142,7 @@ export default function CreateOrUpdateRecipeForm({
                   : ""
               }
             />
-            <Ingredient />
           </StyledFieldSet>
-          {/* <StyledFieldSet>
-            <input
-              type="text"
-              name="amount2"
-              placeholder="Amount"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[1].quantity
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="ingredient2"
-              placeholder="Ingredient"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[1].name
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="amount3"
-              placeholder="Amount"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[2].quantity
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="ingredient3"
-              placeholder="Ingredient"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[2].name
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="amount4"
-              placeholder="Amount"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[3].quantity
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="ingredient4"
-              placeholder="Ingredient"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[3].name
-                  : ""
-              }
-            />
-          </StyledFieldSet> */}
 
           <label htmlFor="description">Description:</label>
           <textarea
