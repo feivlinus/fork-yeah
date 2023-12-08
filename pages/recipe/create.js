@@ -8,6 +8,10 @@ export default function CreatePage({ onAddRecipe, recipes }) {
   const [inputValidation, setInputValidation] = useState("");
   const router = useRouter();
 
+  function handleResetError() {
+    setError("");
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
