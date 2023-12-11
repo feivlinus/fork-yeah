@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import styled from "styled-components";
 import TrashBin from "public/svg/TrashBin.svg";
-import { v4 as uuidv4 } from "uuid";
 
 export default function CreateOrUpdateRecipeForm({
   errorMessage,
@@ -12,6 +11,10 @@ export default function CreateOrUpdateRecipeForm({
   onSubmit,
   onHandleDelete,
   image,
+  ingredientInputs,
+  onHandleAddIngredients,
+  onHandleDeleteIngrendients,
+  onHandleInputChange,
 }) {
   const isCreateNewRecipe = Object.keys(recipeDetails).length === 0;
   const formTitle = isCreateNewRecipe ? "Create new recipe" : "Update Recipe";
@@ -45,14 +48,7 @@ export default function CreateOrUpdateRecipeForm({
       setImagePreviewSrc({ src: URL.createObjectURL(event.target.files[0]) });
     }
   }
-  const [inputs, setInputs] = useState([{ id: 0 }]);
 
-  function handleAddIngredients() {
-    setInputs([...inputs, { id: uuidv4 }]);
-  }
-  function handleDeleteIngredients(id) {
-    setInputs(inputs.filter((input) => input.uuidv4 !== id));
-  }
   return (
     <>
       <h1>{formTitle}</h1>
@@ -107,48 +103,63 @@ export default function CreateOrUpdateRecipeForm({
             onChange={handleImageChange}
             style={{ display: hasImage ? "none" : "block" }}
           />
-          <button type="button" onClick={handleAddIngredients}>
-            Add
-          </button>
+
           <legend>Ingredients:</legend>
-          {inputs.map((input) => (
-            <>
-              <StyledFieldSet key={input.uuidv4}>
+
+          <StyledFieldSet>
+            {ingredientInputs.map((ingredient) => (
+              <>
                 <input
-                  id={`amount-${input.id}`}
+                  id={`amount-${ingredient.id}`}
+                  key={`amount-${ingredient.id}`}
                   type="text"
-                  name="amount1"
+                  name={`amount-${ingredient.id}`}
                   placeholder="Amount"
                   required
-                  defaultValue={
-                    recipeDetails.ingredients &&
-                    recipeDetails.ingredients.length > 0
-                      ? recipeDetails.ingredients[0].quantity
-                      : ""
+                  defaultValue={ingredient.quantity}
+                  onChange={
+                    onHandleInputChange
+                      ? (e) =>
+                          onHandleInputChange(
+                            ingredient.id,
+                            e.target.id,
+                            e.target.value
+                          )
+                      : undefined
                   }
                 />
                 <input
-                  id={`ingredient-${input.id}`}
+                  id={`ingredient-${ingredient.id}`}
+                  key={`ingredient-${ingredient.id}`}
                   type="text"
-                  name="ingredient1"
+                  name={`ingredient-${ingredient.id}`}
                   placeholder="Ingredient"
                   required
-                  defaultValue={
-                    recipeDetails.ingredients &&
-                    recipeDetails.ingredients.length > 0
-                      ? recipeDetails.ingredients[0].name
-                      : ""
+                  defaultValue={ingredient.name}
+                  onChange={
+                    onHandleInputChange
+                      ? (e) =>
+                          onHandleInputChange(
+                            ingredient.id,
+                            e.target.id,
+                            e.target.value
+                          )
+                      : undefined
                   }
                 />
                 <button
                   type="button"
-                  onClick={() => handleDeleteIngredients(input.uuidv4)}
+                  onClick={() => onHandleDeleteIngrendients(ingredient.id)}
                 >
                   X
                 </button>
-              </StyledFieldSet>
-            </>
-          ))}
+              </>
+            ))}
+          </StyledFieldSet>
+
+          <button type="button" onClick={onHandleAddIngredients}>
+            Add Ingredient
+          </button>
 
           <label htmlFor="description">Description:</label>
           <textarea
@@ -187,11 +198,9 @@ const StyledTitleInput = styled.input`
 const StyledFieldSet = styled.fieldset`
   all: unset;
   display: grid;
-  grid-template-columns: 20% 79%;
-  gap: 2vh 1vw;
-  legend {
-    margin-bottom: 2.5%;
-  }
+  grid-template-columns: 19% 71% 9%;
+  gap: 1%;
+  margin-bottom: 2.5%;
 `;
 
 const StyledErrorMessageContainer = styled.div`

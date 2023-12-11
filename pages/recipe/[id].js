@@ -11,7 +11,7 @@ export default function RecipeDetailsPage({
   const { id } = router.query;
 
   const recipeDetails = recipes.find((recipe) => recipe.id === id);
-  console.log(recipeDetails);
+
   if (recipeDetails) {
     return (
       <RecipeDetails

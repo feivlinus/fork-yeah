@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { prepareFormData } from "@/utils/utils";
 import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
+import { v4 as uuidv4 } from "uuid";
 
 export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
   const [error, setError] = useState("");
@@ -12,6 +13,26 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
   const { id } = router.query;
 
   const recipeDetails = recipes.find((recipe) => recipe.id === id);
+
+  const [ingredientInputs, setInputs] = useState([]);
+
+  function handleAddIngredients() {
+    setInputs([...ingredientInputs, { id: uuidv4(), quantity: "", name: "" }]);
+  }
+  function handleDeleteIngredients(id) {
+    setInputs(ingredientInputs.filter((input) => input.id !== id));
+  }
+
+  useEffect(() => {
+    if (recipeDetails) {
+      setInputs(recipeDetails.ingredients.map((ingredient) => ingredient));
+    }
+  }, [recipeDetails]);
+
+  if (!router.isReady || !recipeDetails) {
+    // You can render a loading state or redirect here
+    return <div>Loading...</div>;
+  }
 
   if (recipeDetails?.imageURL && (image === null || image === undefined)) {
     setImage({ id: recipeDetails.imageURL, toDelete: false });
@@ -78,6 +99,9 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
         errorMessage={error}
         inputValidation={inputValidation}
         onHandleDelete={handleToDelete}
+        onHandleAddIngredients={handleAddIngredients}
+        onHandleDeleteIngrendients={handleDeleteIngredients}
+        ingredientInputs={ingredientInputs}
       />
     );
   }
