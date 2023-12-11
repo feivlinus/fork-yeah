@@ -22,7 +22,7 @@ export default createGlobalStyle`
 
   body {
     margin: 0;
-    font-family: open-sans;
+    font-family: 'Open Sans';
     background-color: var(--secondary);
   }
 

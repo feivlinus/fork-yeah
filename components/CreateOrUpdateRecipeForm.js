@@ -201,6 +201,8 @@ const StyledForm = styled.form`
   textarea,
   ::placeholder {
     color: var(--dark);
+    font-family: "Open Sans";
+    font-size: 1rem;
   }
   textarea {
     resize: none;
