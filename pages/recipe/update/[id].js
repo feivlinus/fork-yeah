@@ -1,11 +1,13 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
 import { prepareFormData } from "@/utils/utils";
+import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
 
 export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
   const [error, setError] = useState({ visible: false, text: "" });
   const [inputValidation, setInputValidation] = useState("");
+  const [image, setImage] = useState();
+  const [toDelete, setToDelete] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
@@ -15,8 +17,17 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
     setError({ ...error, visible: false });
   }
 
-  function handleUpdateSubmit(event) {
+  if (recipeDetails?.imageURL && (image === null || image === undefined)) {
+    setImage({ id: recipeDetails.imageURL, toDelete: false });
+  }
+
+  function handleToDelete() {
+    setToDelete(!toDelete);
+  }
+
+  async function handleUpdateSubmit(event) {
     event.preventDefault();
+
     const formData = new FormData(event.target);
     const newRecipeData = Object.fromEntries(formData);
     const preparedNewRecipeData = prepareFormData(newRecipeData, id);
@@ -46,6 +57,7 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
         errorMessage={error}
         inputValidation={inputValidation}
         onResetError={handleResetError}
+        onHandleDelete={handleToDelete}
       />
     );
   }
