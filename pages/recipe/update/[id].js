@@ -27,7 +27,6 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
 
   async function handleUpdateSubmit(event) {
     event.preventDefault();
-
     const formData = new FormData(event.target);
     const newRecipeData = Object.fromEntries(formData);
     const preparedNewRecipeData = prepareFormData(newRecipeData, id);
@@ -43,6 +42,33 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
       return;
     } else {
       setInputValidation("valid");
+    }
+
+    let response = "";
+
+    if (formData.get("file").size > 0) {
+      response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+    } else if (
+      formData.get("file").size === 0 &&
+      recipeDetails.imageId &&
+      toDelete
+    ) {
+      response = await fetch("/api/upload/delete", {
+        method: "POST",
+        body: recipeDetails.imageId,
+      });
+    } else if (!toDelete && formData.get("file").size === 0) {
+      preparedNewRecipeData.imageURL = recipeDetails.imageURL;
+      preparedNewRecipeData.imageId = recipeDetails.imageId;
+    }
+
+    if (response) {
+      const cloudinaryImgURL = await response.json();
+      preparedNewRecipeData.imageURL = cloudinaryImgURL.url;
+      preparedNewRecipeData.imageId = cloudinaryImgURL.imageId;
     }
 
     onUpdateRecipe(preparedNewRecipeData, id);
