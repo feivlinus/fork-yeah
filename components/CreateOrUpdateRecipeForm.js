@@ -17,7 +17,7 @@ export default function CreateOrUpdateRecipeForm({
       <StyledTitle>{formTitle}</StyledTitle>
 
       <StyledErrorMessage $isVisible={errorMessage.visible}>
-        {errorMessage.text}
+        {errorMessage.text} &nbsp;
       </StyledErrorMessage>
 
       <StyledMainContainer>
@@ -178,6 +178,11 @@ const StyledTitle = styled.h1`
   color: var(--dark);
 `;
 
+const StyledTitleInput = styled.input`
+  border: ${({ $isVisible }) =>
+    $isVisible ? "2px solid red" : "2px solid green"};
+`;
+
 const StyledForm = styled.form`
   display: grid;
   grid-template-columns: repeat(auto-fill, 75vw);
@@ -202,11 +207,6 @@ const StyledForm = styled.form`
   }
 `;
 
-const StyledTitleInput = styled.input`
-  border: ${({ $isVisible }) =>
-    $isVisible ? "2px solid red" : "2px solid green"};
-`;
-
 const StyledFieldSet = styled.fieldset`
   all: unset;
   display: grid;
@@ -225,9 +225,9 @@ const StyledErrorMessage = styled.span`
   color: var(--secondary);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   position: fixed;
-  bottom: 75px;
+  bottom: 100px;
   right: ${({ $isVisible }) => ($isVisible ? "0px" : "-500px")};
-  transition: right 1s;
+  transition: right 0.5s;
 `;
 
 const StyledLinkContainer = styled.div`

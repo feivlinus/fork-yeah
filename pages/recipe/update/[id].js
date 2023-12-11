@@ -4,12 +4,16 @@ import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
 import { prepareFormData } from "@/utils/utils";
 
 export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
-  const [error, setError] = useState("");
+  const [error, setError] = useState({ visible: false, text: "" });
   const [inputValidation, setInputValidation] = useState("");
   const router = useRouter();
   const { id } = router.query;
 
   const recipeDetails = recipes.find((recipe) => recipe.id === id);
+
+  function handleResetError() {
+    setError({ ...error, visible: false });
+  }
 
   function handleUpdateSubmit(event) {
     event.preventDefault();
@@ -22,7 +26,8 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
       recipeDetails.name !== preparedNewRecipeData.name
     ) {
       const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;
-      setError(errorString);
+      setError({ visible: true, text: errorString });
+      setTimeout(handleResetError, 5000);
       setInputValidation("already-created");
       return;
     } else {
@@ -40,6 +45,7 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
         onSubmit={handleUpdateSubmit}
         errorMessage={error}
         inputValidation={inputValidation}
+        onResetError={handleResetError}
       />
     );
   }

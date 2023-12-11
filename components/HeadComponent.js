@@ -14,7 +14,7 @@ export default function HeadComponent() {
   );
 }
 
-const StyledHeadContainer = styled.div`
+const StyledHeadContainer = styled.header`
   position: absolute;
   display: block;
   top: 0px;
