@@ -25,8 +25,6 @@ export default async function handler(request, response) {
   const file = files.file[0];
   const { newFilename, filepath } = file;
 
-  // now we have the information about the image, we can send it to cloudinary
-
   const result = await cloudinary.v2.uploader.upload(filepath, {
     public_id: newFilename,
     folder: "recipe-images",

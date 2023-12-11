@@ -1,6 +1,7 @@
 import GlobalStyle from "../styles";
 import useLocalStorageState from "use-local-storage-state";
 import data from "@/db/data";
+import HeadComponent from "@/components/HeadComponent";
 import Navigation from "@/components/Navigation";
 
 export default function App({ Component, pageProps }) {
@@ -43,6 +44,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
+      <HeadComponent />
       <Component
         {...pageProps}
         onAddRecipe={handleAddRecipe}
