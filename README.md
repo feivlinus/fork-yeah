@@ -22,7 +22,7 @@ Each recipe card provides a comprehensive overview, including a captivating imag
 
 ## Technologies and Tools
 
-[React](https://react.dev/)  [Next.js](https://nextjs.org/)  [styled-components](https://styled-components.com/)    [useLocalStorageState](https://github.com/astoilkov/use-local-storage-state)  [Vercel](https://vercel.com/)   [Cloudinary](https://cloudinary.com/) 
+⚛️ [React](https://react.dev/)  ⏭️ [Next.js](https://nextjs.org/)  💅 [styled-components](https://styled-components.com/)    🫙 [useLocalStorageState](https://github.com/astoilkov/use-local-storage-state)  🚀 [Vercel](https://vercel.com/)   ☁️ [Cloudinary](https://cloudinary.com/) 
 
 
 ## Team
