@@ -6,6 +6,7 @@ const data = [
       "Nice not so healthy dish but I swear it tastes wonderful. Buy a cheap as possible pizza. Throw everything inside a large pot. Cut the pizza, tomatoes and salami into very tiny chunks. Cook everything together for at least 12 hours.",
     imageURL:
       "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358482/recipe-images/pizzasoup_m4goru.jpg",
+    imageId: "recipe-images/pizzasoup_m4goru",
     preparationTime: "12 hours",
     ingredients: [
       { quantity: "4", name: "salmon fillets", id: "1-1" },
@@ -21,6 +22,7 @@ const data = [
       "A healthy and colorful salad with quinoa, fresh vegetables, and a tangy vinaigrette.",
     imageURL:
       "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358484/recipe-images/grilled-smiley_ns7icw.png",
+    imageId: "recipe-images/grilled-smiley_ns7icw",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 cup", name: "quinoa, cooked", id: "2-1" },
@@ -40,6 +42,7 @@ const data = [
     description: "Savory beef tacos topped with a refreshing avocado salsa.",
     imageURL:
       "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358483/recipe-images/haunted-lansagna_yahano.png",
+    imageId: "recipe-images/haunted-lansagna_yahano",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", name: "ground beef", id: "3-1" },
@@ -55,6 +58,7 @@ const data = [
       "Delicious pasta tossed in a vibrant pesto sauce and topped with sweet cherry tomatoes.",
     imageURL:
       "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358483/recipe-images/inside-out-lasagna_pteejo.png",
+    imageId: "recipe-images/inside-out-lasagna_pteejo",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "12 oz", name: "penne pasta, cooked", id: "4-1" },
@@ -70,6 +74,7 @@ const data = [
       "Grilled chicken and colorful vegetables skewers marinated in a savory herb sauce.",
     imageURL:
       "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358484/recipe-images/low-carb-ananas-soup_c7yf5o.png",
+    imageId: "recipe-images/low-carb-ananas-soup_c7yf5o",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", name: "chicken breast, cut into cubes", id: "10-1" },
@@ -92,6 +97,7 @@ const data = [
       "Quick and flavorful stir-fried shrimp with tender asparagus spears.",
     imageURL:
       "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358483/recipe-images/unicorn-ice_ecd6t9.jpg",
+    imageId: "recipe-images/unicorn-ice_ecd6t9",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "1 lb", name: "shrimp, peeled and deveined", id: "5-1" },
@@ -113,6 +119,7 @@ const data = [
       "A classic Italian salad with fresh tomatoes, mozzarella, and basil.",
     imageURL:
       "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358483/recipe-images/krabby-patty_oxmrbi.png",
+    imageId: "recipe-images/krabby-patty_oxmrbi",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "4", name: "ripe tomatoes, sliced", id: "6-1" },
@@ -128,6 +135,7 @@ const data = [
       "Hearty and flavorful chili loaded with beans, vegetables, and spices.",
     imageURL:
       "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358484/recipe-images/slime-burger_ykhxje.png",
+    imageId: "recipe-images/slime-burger_ykhxje",
     preparationTime: "40 min",
     ingredients: [
       {
@@ -155,6 +163,7 @@ const data = [
     imageURL:
       "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358485/recipe-images/generic-food-1_dopnzr.png",
     preparationTime: "40 min",
+    imageId: "recipe-images/generic-food-1_dopnzr",
     ingredients: [
       { quantity: "1 cup", name: "Arborio rice", id: "8-1" },
       { quantity: "1/2 lb", name: "mushrooms, sliced", id: "8-2" },
@@ -169,6 +178,7 @@ const data = [
       "Classic homemade chocolate chip cookies that are chewy on the inside and crispy on the outside.",
     imageURL:
       "https://res.cloudinary.com/dkipkog6r/image/upload/v1701358482/recipe-images/a-variarity-of-insects_foavqq.png",
+    imageId: "recipe-images/a-variarity-of-insects_foavqq",
     preparationTime: "40 min",
     ingredients: [
       { quantity: "2 1/4 cups", name: "all-purpose flour", id: "9-1" },

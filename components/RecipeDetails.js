@@ -23,7 +23,7 @@ export default function RecipeDetails({
   }
 
   return (
-    <>
+    <main>
       <RecipeCard>
         <h1> {recipeDetails.name}</h1>
         <StyledImage
@@ -44,30 +44,35 @@ export default function RecipeDetails({
           />
         </StyledButtonContainer>
         <p>⏰ {recipeDetails.preparationTime}</p>
-        <ul>
-          {recipeDetails.ingredients.map(
-            (ingredient) =>
-              ingredient.name && (
-                <li key={uuidv4()}>
-                  {ingredient.quantity} - {ingredient.name}
-                </li>
-              )
-          )}
-        </ul>
+
+        <StyledIngredientTable>
+          <tbody>
+            {recipeDetails.ingredients.map(
+              (ingredient) =>
+                ingredient.name && (
+                  <tr key={uuidv4()}>
+                    <td className="text-right">{ingredient.quantity}</td>
+                    <td className="text-left">{ingredient.name}</td>
+                  </tr>
+                )
+            )}
+          </tbody>
+        </StyledIngredientTable>
+
         <StyledDescription>{recipeDetails.description}</StyledDescription>
       </RecipeCard>
       <StyledActionElementsContainer>
-        <StyledLink href="/">⬅ Back</StyledLink>
+        <StyledBackLink href="/">⬅</StyledBackLink>
 
         <StyledButton type="button" onClick={() => handleDeleteAndReroute()}>
           <StyledTrashBin></StyledTrashBin>
         </StyledButton>
 
         <StyledEditLink href={`update/${recipeDetails.id}`}>
-          <StyledEditPen></StyledEditPen>
+          <StyledEditPen />
         </StyledEditLink>
       </StyledActionElementsContainer>
-    </>
+    </main>
   );
 }
 
@@ -76,42 +81,96 @@ const RecipeCard = styled.article`
   flex-direction: column;
   align-items: center;
   position: relative;
+  color: var(--dark);
 `;
 
 const StyledImage = styled(Image)`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 1.5rem;
+`;
+
+const StyledIngredientTable = styled.table`
+  padding: 1rem;
+  .text-left {
+    text-align: left;
+  }
+  .text-right {
+    text-align: right;
+  }
+
+  border-collapse: collapse;
+
+  td {
+    padding: 4px 8px;
+    /* border-radius: 0.5rem; */
+  }
+
+  tr {
+    border: none;
+  }
+
+  tbody {
+    display: table-row-group;
+    vertical-align: middle;
+  }
+  td:nth-child(even) {
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+  td:nth-child(odd) {
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: var(--secondary-darker);
+  }
 `;
 
 const StyledDescription = styled.p`
   margin: 1rem;
 `;
 
-const StyledLink = styled(Link)`
+const StyledBackLink = styled(Link)`
   all: unset;
-  background-color: #000;
-  padding: 5px 32px;
+  width: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  border: 2px solid var(--dark-secondary);
+  color: var(--dark-secondary);
   font-size: 1rem;
-  border-radius: 0.4em;
-  color: #fff;
+  border-radius: 0.5rem;
   &:hover {
     cursor: pointer;
+  }
+  background-position: center;
+  transition: background 0.5s, color 0.5s;
+
+  &:active {
+    color: var(--secondary);
+    background-color: var(--dark-secondary);
+    background-size: 100%;
+    transition: background 0s;
   }
 `;
 
 const StyledActionElementsContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 4rem;
   margin-top: 1rem;
   margin-bottom: 4.5rem;
 `;
 
 const StyledTrashBin = styled(TrashBin)`
   height: 35px;
-  width: 35px;
+  width: auto;
   &:hover {
     cursor: pointer;
   }
+  fill: var(--dark-secondary);
 `;
+
 const StyledButton = styled.button`
   all: unset;
 `;
@@ -123,13 +182,14 @@ const StyledEditLink = styled(Link)`
 `;
 
 const StyledEditPen = styled(EditPen)`
-  height: 32px;
+  height: 35px;
   width: 35px;
   &:hover {
     cursor: pointer;
   }
+  fill: var(--dark-secondary);
 `;
 
 const StyledButtonContainer = styled.div`
-  margin: 5% 5%;
+  margin: 1rem 1rem;
 `;

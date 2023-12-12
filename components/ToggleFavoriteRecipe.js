@@ -23,7 +23,7 @@ export default function ToggleFavoriteRecipe({
       <StyledHeartCircle>
         <HeartIcon
           variant={isFavorite ? "favorite" : "noFavorite"}
-          color={"#FF3B3B"}
+          color={"var(--secondary)"}
           size={"1.25rem"}
         />
       </StyledHeartCircle>
@@ -46,7 +46,7 @@ const StyledButton = styled.button`
 
 const StyledHeartCircle = styled.div`
   border-radius: 2rem;
-  background: #fff;
+  background: var(--primary);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   width: 2rem;
   height: 2rem;

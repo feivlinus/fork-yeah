@@ -5,7 +5,7 @@ import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
 import { v4 as uuidv4 } from "uuid";
 
 export default function CreatePage({ onAddRecipe, recipes }) {
-  const [error, setError] = useState("");
+  const [error, setError] = useState({ visible: false, text: "" });
   const [inputValidation, setInputValidation] = useState("");
   const router = useRouter();
 
@@ -54,6 +54,10 @@ export default function CreatePage({ onAddRecipe, recipes }) {
     });
   }
 
+  function handleResetError() {
+    setError({ ...error, visible: false });
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -63,7 +67,8 @@ export default function CreatePage({ onAddRecipe, recipes }) {
 
     if (recipes.find((recipe) => recipe.name === preparedNewRecipeData.name)) {
       const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;
-      setError(errorString);
+      setError({ visible: true, text: errorString });
+      setTimeout(handleResetError, 5000);
       setInputValidation("already-created");
       return;
     } else {
@@ -94,6 +99,7 @@ export default function CreatePage({ onAddRecipe, recipes }) {
         onHandleDeleteIngrendients={handleDeleteIngredients}
         ingredientInputs={ingredientInputs}
         onHandleInputChange={handleOnInputChange}
+        onResetError={handleResetError}
       />
     </>
   );

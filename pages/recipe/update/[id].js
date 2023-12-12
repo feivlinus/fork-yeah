@@ -5,7 +5,7 @@ import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
 import { v4 as uuidv4 } from "uuid";
 
 export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
-  const [error, setError] = useState("");
+  const [error, setError] = useState({ visible: false, text: "" });
   const [inputValidation, setInputValidation] = useState("");
   const [image, setImage] = useState();
   const [toDelete, setToDelete] = useState(false);
@@ -34,6 +34,10 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
     return <div>Loading...</div>;
   }
 
+  function handleResetError() {
+    setError({ ...error, visible: false });
+  }
+
   if (recipeDetails?.imageURL && (image === null || image === undefined)) {
     setImage({ id: recipeDetails.imageURL, toDelete: false });
   }
@@ -44,31 +48,31 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
 
   async function handleUpdateSubmit(event) {
     event.preventDefault();
-
     const formData = new FormData(event.target);
     const newRecipeData = Object.fromEntries(formData);
     const preparedNewRecipeData = prepareFormData(newRecipeData, id);
 
     if (
-      preparedNewRecipeData.name !== recipeDetails.name &&
-      recipes.find((recipe) => recipe.name === preparedNewRecipeData.name)
+      recipes.find((recipe) => recipe.name === preparedNewRecipeData.name) &&
+      recipeDetails.name !== preparedNewRecipeData.name
     ) {
       const errorString = `"${preparedNewRecipeData.name}" is allready in use. Use another title please.`;
-      setError(errorString);
+      setError({ visible: true, text: errorString });
+      setTimeout(handleResetError, 5000);
       setInputValidation("already-created");
       return;
+    } else {
+      setInputValidation("valid");
     }
 
     let response = "";
-    //Image upload fetch if new image is in form
+
     if (formData.get("file").size > 0) {
       response = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
-    }
-    //Delete old image from cloudinary when image got removed and no file was selected
-    else if (
+    } else if (
       formData.get("file").size === 0 &&
       recipeDetails.imageId &&
       toDelete
@@ -77,16 +81,17 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
         method: "POST",
         body: recipeDetails.imageId,
       });
+    } else if (!toDelete && formData.get("file").size === 0) {
+      preparedNewRecipeData.imageURL = recipeDetails.imageURL;
+      preparedNewRecipeData.imageId = recipeDetails.imageId;
     }
 
-    //When there is a file upload
     if (response) {
       const cloudinaryImgURL = await response.json();
       preparedNewRecipeData.imageURL = cloudinaryImgURL.url;
       preparedNewRecipeData.imageId = cloudinaryImgURL.imageId;
     }
 
-    setInputValidation("valid");
     onUpdateRecipe(preparedNewRecipeData, id);
     router.push(`/recipe/${id}`);
   }
@@ -98,6 +103,7 @@ export default function UpdateRecipeDetails({ recipes, onUpdateRecipe }) {
         onSubmit={handleUpdateSubmit}
         errorMessage={error}
         inputValidation={inputValidation}
+        onResetError={handleResetError}
         onHandleDelete={handleToDelete}
         onHandleAddIngredients={handleAddIngredients}
         onHandleDeleteIngrendients={handleDeleteIngredients}
