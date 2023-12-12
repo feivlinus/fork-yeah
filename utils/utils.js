@@ -8,17 +8,22 @@ import { v4 as uuidv4, v4 } from "uuid";
  * @returns {object}
  */
 export function prepareFormData(formData, id) {
+  const amountKeys = Object.keys(formData).filter((key) =>
+    key.startsWith("amount-")
+  );
+
+  const pairs = amountKeys.map((key) => ({
+    quantity: formData[key],
+    name: formData[key.replace("amount-", "ingredient-")],
+    id: uuidv4(),
+  }));
+
   return {
     id: id ?? uuidv4(),
     name: formData.title,
     preparationTime: formData.duration,
-
+    imageURL: formData.imageURL,
     description: formData.description,
-    ingredients: [
-      { quantity: formData.amount1, name: formData.ingredient1 },
-      { quantity: formData.amount2, name: formData.ingredient2 },
-      { quantity: formData.amount3, name: formData.ingredient3 },
-      { quantity: formData.amount4, name: formData.ingredient4 },
-    ],
+    ingredients: pairs,
   };
 }

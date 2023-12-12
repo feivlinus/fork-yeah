@@ -11,6 +11,10 @@ export default function CreateOrUpdateRecipeForm({
   onSubmit,
   onHandleDelete,
   image,
+  ingredientInputs,
+  onHandleAddIngredients,
+  onHandleDeleteIngrendients,
+  onHandleInputChange,
 }) {
   const isCreateNewRecipe = Object.keys(recipeDetails).length === 0;
   const formTitle = isCreateNewRecipe ? "Create new recipe" : "Update Recipe";
@@ -64,7 +68,6 @@ export default function CreateOrUpdateRecipeForm({
             defaultValue={recipeDetails.name}
             $isVisible={errorMessage.visible}
           />
-
           <label htmlFor="duration">Cooking duration:</label>
           <input
             type="text"
@@ -72,7 +75,6 @@ export default function CreateOrUpdateRecipeForm({
             name="duration"
             defaultValue={recipeDetails.preparationTime}
           />
-
           <label htmlFor="file">Image</label>
           {(hasImage || imagePreviewSrc.src) && (
             <StyledImageContainer>
@@ -87,7 +89,7 @@ export default function CreateOrUpdateRecipeForm({
               </div>
             </StyledImageContainer>
           )}
-          <input
+          <StyledFileInput
             type="file"
             id="file"
             name="file"
@@ -96,101 +98,63 @@ export default function CreateOrUpdateRecipeForm({
             onChange={handleImageChange}
             style={{ display: hasImage ? "none" : "block" }}
           />
-
+          <legend>Ingredients:</legend>{" "}
+          <StyledAddIngredientButton
+            type="button"
+            onClick={onHandleAddIngredients}
+          >
+            Add Ingredient
+          </StyledAddIngredientButton>
           <StyledFieldSet>
-            <legend>Ingredients:</legend>
-            <input
-              type="text"
-              name="amount1"
-              placeholder="Amount"
-              required
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[0].quantity
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="ingredient1"
-              placeholder="Ingredient"
-              required
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[0].name
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="amount2"
-              placeholder="Amount"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[1].quantity
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="ingredient2"
-              placeholder="Ingredient"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[1].name
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="amount3"
-              placeholder="Amount"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[2].quantity
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="ingredient3"
-              placeholder="Ingredient"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[2].name
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="amount4"
-              placeholder="Amount"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[3].quantity
-                  : ""
-              }
-            />
-            <input
-              type="text"
-              name="ingredient4"
-              placeholder="Ingredient"
-              defaultValue={
-                recipeDetails.ingredients &&
-                recipeDetails.ingredients.length > 0
-                  ? recipeDetails.ingredients[3].name
-                  : ""
-              }
-            />
+            {ingredientInputs.map((ingredient) => (
+              <>
+                <input
+                  id={`amount-${ingredient.id}`}
+                  key={`amount-${ingredient.id}`}
+                  type="text"
+                  name={`amount-${ingredient.id}`}
+                  placeholder="Amount"
+                  required
+                  defaultValue={ingredient.quantity}
+                  onChange={
+                    onHandleInputChange
+                      ? (e) =>
+                          onHandleInputChange(
+                            ingredient.id,
+                            e.target.id,
+                            e.target.value
+                          )
+                      : undefined
+                  }
+                />
+                <input
+                  id={`ingredient-${ingredient.id}`}
+                  key={`ingredient-${ingredient.id}`}
+                  type="text"
+                  name={`ingredient-${ingredient.id}`}
+                  placeholder="Ingredient"
+                  required
+                  defaultValue={ingredient.name}
+                  onChange={
+                    onHandleInputChange
+                      ? (e) =>
+                          onHandleInputChange(
+                            ingredient.id,
+                            e.target.id,
+                            e.target.value
+                          )
+                      : undefined
+                  }
+                />
+                <StyledDeleteIngredientButton
+                  type="button"
+                  onClick={() => onHandleDeleteIngrendients(ingredient.id)}
+                >
+                  <TrashBin />
+                </StyledDeleteIngredientButton>
+              </>
+            ))}
           </StyledFieldSet>
-
           <label htmlFor="description">Description:</label>
           <textarea
             name="description"
@@ -256,11 +220,10 @@ const StyledForm = styled.form`
 const StyledFieldSet = styled.fieldset`
   all: unset;
   display: grid;
-  grid-template-columns: 20% 79%;
-  gap: 2vh 1vw;
-  legend {
-    margin-bottom: 2.5%;
-  }
+  grid-template-columns: 22% 67% 9%;
+  gap: 0.25rem;
+  margin-bottom: 2.5%;
+  max-width: 75vw;
 `;
 
 const StyledErrorMessage = styled.span`
@@ -365,4 +328,73 @@ const StyledTrasBin = styled(TrashBin)`
   border-radius: 45%;
   border: solid black 2px;
   padding: 4px 4px;
+`;
+
+const StyledAddIngredientButton = styled.button`
+  all: unset;
+  width: 8rem;
+  padding: 0.25rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  border: 1px solid var(--dark);
+  color: var(--dark);
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
+  background-position: center;
+  transition: background 0.5s, color 0.5s;
+
+  &:active {
+    color: var(--secondary);
+    background-color: var(--dark-secondary);
+    background-size: 100%;
+    transition: background 0s;
+  }
+`;
+
+const StyledDeleteIngredientButton = styled.button`
+  all: unset;
+  fill: var(--dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-tap-highlight-color: transparent;
+  border: 1px solid var(--dark);
+  color: var(--dark);
+  border-radius: 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
+  background-position: center;
+  transition: background 0.5s, color 0.5s;
+
+  &:active {
+    color: var(--secondary);
+    background-color: var(--dark-secondary);
+    background-size: 100%;
+    transition: background 0s;
+  }
+`;
+
+const StyledFileInput = styled.input`
+  &::file-selector-button {
+    all: unset;
+    border: 1px solid var(--dark);
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    margin-right: 1rem;
+    background-position: center;
+    transition: background 0.5s, color 0.5s;
+  }
+
+  &::file-selector-button:active {
+    color: var(--secondary);
+    background-color: var(--dark-secondary);
+    background-size: 100%;
+    transition: background 0s;
+  }
 `;

@@ -2,11 +2,57 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { prepareFormData } from "@/utils/utils";
 import CreateOrUpdateRecipeForm from "@/components/CreateOrUpdateRecipeForm";
+import { v4 as uuidv4 } from "uuid";
 
 export default function CreatePage({ onAddRecipe, recipes }) {
   const [error, setError] = useState({ visible: false, text: "" });
   const [inputValidation, setInputValidation] = useState("");
   const router = useRouter();
+
+  const [ingredientInputs, setInputs] = useState([
+    {
+      id: uuidv4(),
+      quantity: "",
+      name: "",
+    },
+  ]);
+
+  function handleAddIngredients() {
+    setInputs([...ingredientInputs, { id: uuidv4(), quantity: "", name: "" }]);
+  }
+  function handleDeleteIngredients(id) {
+    setInputs(ingredientInputs.filter((input) => input.id !== id));
+  }
+
+  function handleOnInputChange(ingredientId, field, value) {
+    setInputs((prevInputs) => {
+      const updatedInputs = prevInputs.map((ingredient) => {
+        if (ingredient.id === ingredientId) {
+          if (field.startsWith("ingredient-")) {
+            return { ...ingredient, name: value };
+          }
+          if (field.startsWith("amount-")) {
+            return { ...ingredient, quantity: value };
+          }
+        }
+        return ingredient;
+      });
+
+      const foundIngredient = updatedInputs.find(
+        (ingredient) => ingredient.id === ingredientId
+      );
+
+      if (!foundIngredient) {
+        updatedInputs.push({
+          id: ingredientId,
+          quantity: field.startsWith("amount-") ? value : "",
+          name: field.startsWith("ingredient-") ? value : "",
+        });
+      }
+
+      return updatedInputs;
+    });
+  }
 
   function handleResetError() {
     setError({ ...error, visible: false });
@@ -49,6 +95,10 @@ export default function CreatePage({ onAddRecipe, recipes }) {
         onSubmit={handleSubmit}
         errorMessage={error}
         inputValidation={inputValidation}
+        onHandleAddIngredients={handleAddIngredients}
+        onHandleDeleteIngrendients={handleDeleteIngredients}
+        ingredientInputs={ingredientInputs}
+        onHandleInputChange={handleOnInputChange}
         onResetError={handleResetError}
       />
     </>
