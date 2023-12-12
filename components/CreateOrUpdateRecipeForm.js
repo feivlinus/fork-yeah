@@ -198,7 +198,7 @@ const StyledTitleInput = styled.input`
 const StyledFieldSet = styled.fieldset`
   all: unset;
   display: grid;
-  grid-template-columns: 19% 71% 9%;
+  grid-template-columns: 19% 70% 9%;
   gap: 1%;
   margin-bottom: 2.5%;
 `;
@@ -230,7 +230,6 @@ const StyledLink = styled(Link)`
   appearance: auto;
   text-rendering: auto;
   color: buttontext;
-
   display: inline-block;
   text-align: center;
   align-items: flex-start;
